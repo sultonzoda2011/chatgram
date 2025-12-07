@@ -1,5 +1,5 @@
 import { api } from '@/lib/utils/axiosConfig'
-import { IPrivateChatHistoryResponse } from '@/types/privateChatHistory'
+import { IPrivateChatHistoryResponse } from '@/types/chatPrivate'
 export const getPrivateChats = async (otherUserId: string, Skip?: number) => {
   try {
     const response = await api.get<IPrivateChatHistoryResponse>('/Chat/history/private', {

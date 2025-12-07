@@ -1,6 +1,4 @@
 'use client'
-
-import * as React from 'react'
 import { Input } from '@/ui/input/input'
 import { FileImageIcon, SendHorizonal } from 'lucide-react'
 import { Button } from '@/ui/button/button'

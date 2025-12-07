@@ -1,33 +1,17 @@
 'use client'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { Input } from '@/ui/input/input'
 import Friends from '@/ui/layout/sidebar/friends/friends'
 import { Search } from 'lucide-react'
-import { decodeJwt } from '@/lib/utils/jwt'
-import { useRouter } from 'next/navigation'
-import { removeToken } from '@/lib/utils/cookies'
 import ProfileUserModal from '@/ui/profileUser/profileUserModal'
 import Users from '@/ui/layout/sidebar/users/users'
 
 const Sidebar = () => {
   const [searchQuery, setSearchQuery] = useState<string>('')
   const [profileUserModalOpen, setProfileUserModalOpen] = useState(false)
+
   const [userName, setUserName] = useState<string>('')
   const [canSendRequest, setCanSendRequest] = useState<boolean>(false)
-  const router = useRouter()
-  const info = decodeJwt()
-  useEffect(() => {
-    if (!info || !info.exp) {
-      router.push('/login')
-      return
-    }
-
-    const expDate = new Date(info.exp * 1000)
-    if (new Date() > expDate) {
-      removeToken()
-      router.push('/login')
-    }
-  }, [info, router])
 
   return (
     <div className="p-4 w-90 h-screen border-r  flex flex-col ">
@@ -53,7 +37,11 @@ const Sidebar = () => {
           />
         )}
         {!searchQuery && (
-          <Friends setUserName={setUserName} setProfileUserModalOpen={setProfileUserModalOpen} setCanSendRequest={setCanSendRequest} />
+          <Friends
+            setUserName={setUserName}
+            setProfileUserModalOpen={setProfileUserModalOpen}
+            setCanSendRequest={setCanSendRequest}
+          />
         )}
       </div>
       <ProfileUserModal
