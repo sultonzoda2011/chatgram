@@ -1,0 +1,28 @@
+{
+  "login": {
+    "title": "Sign In",
+    "subtitle": "Welcome back! Please sign in to continue.",
+    "usernameLabel": "Username",
+    "usernamePlaceholder": "Enter your username",
+    "passwordLabel": "Password",
+    "passwordPlaceholder": "Enter your password",
+    "submitButton": "Sign In",
+    "noAccount": "Don't have an account?",
+    "signUp": "Sign Up"
+  },
+  "register": {
+    "title": "Sign Up",
+    "subtitle": "Welcome! Please sign up to continue.",
+    "usernameLabel": "Username",
+    "usernamePlaceholder": "Enter your username",
+    "fullnameLabel": "Full Name",
+    "fullnamePlaceholder": "Enter your full name",
+    "emailLabel": "Email",
+    "emailPlaceholder": "Enter your email",
+    "passwordLabel": "Password",
+    "passwordPlaceholder": "Enter your password",
+    "submitButton": "Sign Up",
+    "haveAccount": "Already have an account?",
+    "signIn": "Sign In"
+  }
+}

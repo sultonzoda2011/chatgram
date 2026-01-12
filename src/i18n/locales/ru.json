@@ -1,0 +1,29 @@
+{
+  "login": {
+    "title": "Вход",
+    "subtitle": "С возвращением! Пожалуйста, войдите, чтобы продолжить.",
+    "usernameLabel": "Имя пользователя",
+    "usernamePlaceholder": "Введите имя пользователя",
+    "passwordLabel": "Пароль",
+    "passwordPlaceholder": "Введите пароль",
+    "submitButton": "Войти",
+    "noAccount": "Нет аккаунта?",
+    "signUp": "Зарегистрироваться"
+
+  },
+  "register": {
+    "title": "Регистрация",
+    "subtitle": "Добро пожаловать! Пожалуйста, зарегистрируйтесь, чтобы продолжить.",
+    "usernameLabel": "Имя пользователя",
+    "usernamePlaceholder": "Введите имя пользователя",
+    "fullnameLabel": "Полное имя",
+    "fullnamePlaceholder": "Введите полное имя",
+    "emailLabel": "Электронная почта",
+    "emailPlaceholder": "Введите электронную почту",
+    "passwordLabel": "Пароль",
+    "passwordPlaceholder": "Введите пароль",
+    "submitButton": "Зарегистрироваться",
+    "haveAccount": "Уже есть аккаунт?",
+    "signIn": "Войти"
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "login": {
+    "title": "Вуруд",
+    "subtitle": "Хуш омадед боз! Лутфан барои идома ворид шавед.",
+    "usernameLabel": "Номи корбар",
+    "usernamePlaceholder": "Номи корбарро ворид кунед",
+    "passwordLabel": "Рамз",
+    "passwordPlaceholder": "Рамзро ворид кунед",
+    "submitButton": "Ворид шудан",
+    "noAccount": "Ҳисоб надоред?",
+    "signUp": "Сабти ном"
+  },
+  "register": {
+    "title": "Сабти ном",
+    "subtitle": "Хуш омадед! Лутфан барои идома сабти ном шавед.",
+    "usernameLabel": "Номи корбар",
+    "usernamePlaceholder": "Номи корбарро ворид кунед",
+    "fullnameLabel": "Номи пурра",
+    "fullnamePlaceholder": "Номи пурраро ворид кунед",
+    "emailLabel": "Почтаи электронӣ",
+    "emailPlaceholder": "Почтаи электрониро ворид кунед",
+    "passwordLabel": "Рамз",
+    "passwordPlaceholder": "Рамзро ворид кунед",
+    "submitButton": "Сабти ном",
+    "haveAccount": "Аллакай ҳисоб доред?",
+    "signIn": "Ворид шудан"
+  }
+}
