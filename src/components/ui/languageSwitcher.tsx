@@ -1,11 +1,11 @@
-import { useState, useRef, useEffect } from 'react'
-import { useTranslation } from 'react-i18next'
 import { ChevronDown, Globe } from 'lucide-react'
+import { useEffect, useRef, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 
+import { Button } from '@/components/ui/button/button'
 import enFlag from '../../assets/flags/gb.svg'
 import ruFlag from '../../assets/flags/ru.svg'
 import tjFlag from '../../assets/flags/tj.svg'
-import { Button } from '@/components/ui/button'
 
 const languages = [
   { code: 'en', label: 'English', flag: enFlag },
