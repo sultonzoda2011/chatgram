@@ -1,21 +1,21 @@
+import { registerApi } from '@/api/authApi'
+import { Button } from '@/components/ui/button/button'
+import FormInput from '@/components/ui/input/formInput'
+import LanguageSwitcher from '@/components/ui/languageSwitcher'
+import { setToken } from '@/lib/utils/cookie'
 import { RegisterSchema } from '@/schemas/auth'
 import type { IRegister } from '@/types/auth'
-import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
-import FormInput from '@/components/ui/formInput'
-import { Lock, Mail, User } from 'lucide-react'
-import { Button } from '@/components/ui/button'
 import { useMutation } from '@tanstack/react-query'
-import { registerApi } from '@/api/authApi'
-import { toast } from 'sonner'
-import { setToken } from '@/lib/utils/cookie'
-import { Link, useNavigate } from 'react-router-dom'
+import { Lock, Mail, User } from 'lucide-react'
+import { useForm } from 'react-hook-form'
 import { useTranslation } from 'react-i18next'
-import LanguageSwitcher from '@/components/ui/LanguageSwitcher'
+import { Link, useNavigate } from 'react-router-dom'
+import { toast } from 'sonner'
 const RegisterPage = () => {
   const navigate = useNavigate()
   const { t } = useTranslation()
-  const { mutate } = useMutation({
+  const { mutate, isPending } = useMutation({
     mutationFn: registerApi,
     onSuccess: (res) => {
       toast.success(res.message)
@@ -76,7 +76,9 @@ const RegisterPage = () => {
             placeholder={t('register.passwordPlaceholder')}
             icon={Lock}
           />
-          <Button type="submit">{t('register.submitButton')}</Button>
+          <Button type="submit" isPending={isPending}>
+            {t('register.submitButton')}
+          </Button>
         </form>
         <p className="mt-4 text-center text-sm text-gray-500">
           {t('register.haveAccount')}{' '}
