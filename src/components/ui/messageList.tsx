@@ -1,5 +1,6 @@
 import { deleteMessagesApi } from '@/api/messageApi'
 import { Button } from '@/components/ui/button/button'
+import { formatDate } from '@/lib/utils/date'
 import type { IChatMessage } from '@/types/message'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { Edit, Trash2 } from 'lucide-react'
@@ -47,7 +48,7 @@ const MessageList = ({ messages, userId, setMessageId, setContent }: MessageList
               </div>
             )}
           </div>
-          <p>{message.date}</p>
+          <p>{formatDate(message.date)}</p>
         </div>
       ))}
     </div>
