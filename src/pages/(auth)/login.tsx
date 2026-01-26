@@ -1,8 +1,8 @@
 import { loginApi } from '@/api/authApi'
-import { Button } from '@/components/ui/button'
-import FormInput from '@/components/ui/formInput'
+import { Button } from '@/components/ui/button/button'
+import FormInput from '@/components/ui/input/formInput'
+import LanguageSwitcher from '@/components/ui/languageSwitcher'
 import { setToken } from '@/lib/utils/cookie'
-import LanguageSwitcher from '@/components/ui/LanguageSwitcher'
 import { LoginSchema } from '@/schemas/auth'
 import type { ILogin } from '@/types/auth'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -15,7 +15,7 @@ import { toast } from 'sonner'
 const LoginPage = () => {
   const navigate = useNavigate()
   const { t } = useTranslation()
-  const { mutate } = useMutation({
+  const { mutate, isPending } = useMutation({
     mutationFn: loginApi,
     onSuccess: (res) => {
       toast.success(res.message)
@@ -61,7 +61,9 @@ const LoginPage = () => {
             placeholder={t('login.passwordPlaceholder')}
             icon={Lock}
           />
-          <Button type="submit">{t('login.submitButton')}</Button>
+          <Button type="submit" isPending={isPending}>
+            {t('login.submitButton')}
+          </Button>
         </form>
         <p className="mt-4 text-center text-sm text-gray-500">
           {t('login.noAccount')}{' '}
