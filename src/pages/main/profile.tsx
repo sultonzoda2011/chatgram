@@ -8,6 +8,7 @@ import { Button } from '@/components/ui/button/button'
 import ChangePassword from '@/components/ui/modals/change-password/modal'
 import LanguageSwitcher from '@/components/ui/languageSwitcher'
 import { ModeToggle } from '@/components/mode-toggle'
+import { useTranslation } from 'react-i18next'
 
 const ProfilePage = () => {
   const {
@@ -20,6 +21,7 @@ const ProfilePage = () => {
   })
   const [changePasswordModalOpen, setChangePasswordModalOpen] = useState(false)
   const [updateProfileModalOpen, setUpdateProfileModalOpen] = useState(false)
+  const { t } = useTranslation()
 
   const getFirstLetter = () => profileData?.fullname?.charAt(0).toUpperCase() || '?'
 
@@ -30,7 +32,7 @@ const ProfilePage = () => {
           <div className="animate-spin mb-4">
             <div className="w-16 h-16 border-4 border-border border-t-primary rounded-full"></div>
           </div>
-          <p className="text-foreground text-lg">Загрузка профиля...</p>
+          <p className="text-foreground text-lg">{t('profile.loading')}</p>
         </div>
       </div>
     )
@@ -40,8 +42,8 @@ const ProfilePage = () => {
     return (
       <div className="min-h-screen flex items-center justify-center bg-background">
         <div className="bg-destructive/20 border border-destructive/50 rounded-2xl p-8 max-w-md text-center">
-          <p className="text-destructive text-lg font-semibold">Ошибка загрузки профиля</p>
-          <p className="text-destructive/70 text-sm mt-2">Пожалуйста, попробуйте позже</p>
+          <p className="text-destructive text-lg font-semibold">{t('profile.errorTitle')}</p>
+          <p className="text-destructive/70 text-sm mt-2">{t('profile.errorDesc')}</p>
         </div>
       </div>
     )
@@ -68,7 +70,7 @@ const ProfilePage = () => {
               size="default"
               className="mt-4"
             >
-              <Edit2 size={20} /> Обновить профиль
+              <Edit2 size={20} /> {t('profile.updateTitle')}
             </Button>
             <Button
               onClick={() => setChangePasswordModalOpen(true)}
@@ -76,17 +78,17 @@ const ProfilePage = () => {
               size="default"
               className="mt-4 ml-4"
             >
-              Изменить пароль
+              {t('profile.changePassword')}
             </Button>
           </div>
         </div>
 
         <div className="bg-card rounded-3xl shadow-lg p-8 space-y-6">
-          <h2 className="text-2xl font-bold mb-6">Контактная информация</h2>
+          <h2 className="text-2xl font-bold mb-6">{t('profile.contactInfo')}</h2>
 
           <div>
             <label className="text-muted-foreground text-sm font-semibold mb-2 flex items-center gap-2">
-              <User size={16} /> Имя пользователя
+              <User size={16} /> {t('profile.username')}
             </label>
             <div className="bg-popover border border-border rounded-xl p-4 text-foreground text-lg">
               @{profileData?.username}
@@ -95,7 +97,7 @@ const ProfilePage = () => {
 
           <div>
             <label className="flex gap-2 items-center text-muted-foreground text-sm font-semibold mb-2">
-              <User size={16} /> Полное имя
+              <User size={16} /> {t('profile.fullname')}
             </label>
             <div className="bg-popover border border-border rounded-xl p-4 text-foreground text-lg">
               {profileData?.fullname}
@@ -104,7 +106,7 @@ const ProfilePage = () => {
 
           <div>
             <label className="text-muted-foreground text-sm font-semibold mb-2 flex items-center gap-2">
-              <Mail size={16} /> Электронная почта
+              <Mail size={16} /> {t('profile.email')}
             </label>
             <div className="bg-popover border border-border rounded-xl p-4 text-foreground text-lg break-all">
               {profileData?.email}

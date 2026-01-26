@@ -4,9 +4,11 @@ import { formatDate } from '@/lib/utils/date'
 import type { IChatItem } from '@/types/chat'
 import { useQuery } from '@tanstack/react-query'
 import { useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
 
 const ChatsPage = () => {
+  const { t } = useTranslation()
   const {
     data: chatsData,
     isPending: chatsPending,
@@ -20,8 +22,8 @@ const ChatsPage = () => {
   const filteredChats = chatsData?.filter((chat) =>
     chat.fullname.toLowerCase().includes(search.toLowerCase()),
   )
-  if (chatsPending) return <div className="p-4">Loading chats...</div>
-  if (chatsError) return <div className="p-4 text-red-500">Failed to load chats</div>
+  if (chatsPending) return <div className="p-4">{t('home.loading')}</div>
+  if (chatsError) return <div className="p-4 text-red-500">{t('home.error')}</div>
 
   return (
     <div>
@@ -37,7 +39,7 @@ const ChatsPage = () => {
             <div>
               <h3 className="font-medium">{chat.fullname}</h3>
               <p className="text-sm text-gray-500 truncate">
-                {chat.last_message || 'No messages yet'}
+                {chat.last_message || t('home.noMessages')}
               </p>
             </div>
             <p>{formatDate(chat.date)}</p>

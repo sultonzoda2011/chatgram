@@ -9,7 +9,6 @@
     "submitButton": "Войти",
     "noAccount": "Нет аккаунта?",
     "signUp": "Зарегистрироваться"
-
   },
   "register": {
     "title": "Регистрация",
@@ -25,5 +24,50 @@
     "submitButton": "Зарегистрироваться",
     "haveAccount": "Уже есть аккаунт?",
     "signIn": "Войти"
+  },
+  "common": {
+    "loading": "Загрузка...",
+    "error": "Ошибка!",
+    "cancel": "Отмена",
+    "search": "Поиск"
+  },
+  "home": {
+    "searchPlaceholder": "Поиск",
+    "loading": "Загрузка чатов...",
+    "error": "Ошибка загрузки чатов",
+    "noMessages": "Сообщений пока нет"
+  },
+  "profile": {
+    "loading": "Загрузка профиля...",
+    "errorTitle": "Ошибка загрузки профиля",
+    "errorDesc": "Пожалуйста, попробуйте позже",
+    "updateTitle": "Обновить профиль",
+    "changePassword": "Изменить пароль",
+    "contactInfo": "Контактная информация",
+    "username": "Имя пользователя",
+    "fullname": "Полное имя",
+    "email": "Электронная почта",
+    "successUpdate": "Профиль успешно обновлен",
+    "errorUpdate": "Не удалось обновить профиль",
+    "placeholders": {
+      "fullname": "Введите ваше полное имя",
+      "email": "Введите ваш email",
+      "username": "Введите имя пользователя"
+    }
+  },
+  "password": {
+    "successUpdate": "Пароль успешно обновлен",
+    "errorUpdate": "Не удалось обновить пароль",
+    "old": "Старый пароль",
+    "new": "Новый пароль",
+    "confirm": "Подтвердите новый пароль",
+    "placeholderOld": "Введите старый пароль",
+    "placeholderNew": "Введите новый пароль",
+    "placeholderConfirm": "Подтвердите новый пароль",
+    "updateButton": "Обновить пароль"
+  },
+  "chat": {
+    "editing": "Редактирование сообщения",
+    "placeholder": "Введите сообщение..."
   }
 }

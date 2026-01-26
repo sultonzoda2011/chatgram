@@ -8,6 +8,7 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { Mail, User } from 'lucide-react'
 import { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
+import { useTranslation } from 'react-i18next'
 import { toast } from 'sonner'
 
 interface IUpdateProfileProps {
@@ -19,6 +20,7 @@ const UpdateProfile = ({
   updateProfileModalOpen,
   setUpdateProfileModalOpen,
 }: IUpdateProfileProps) => {
+  const { t } = useTranslation()
   const queryClient = useQueryClient()
   const {
     data: profileData,
@@ -35,11 +37,11 @@ const UpdateProfile = ({
     mutationFn: updateProfileApi,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['profile'] })
-      toast.success('Profile updated successfully')
+      toast.success(t('profile.successUpdate'))
       setUpdateProfileModalOpen(false)
     },
     onError: () => {
-      toast.error('Failed to update profile')
+      toast.error(t('profile.errorUpdate'))
     },
   })
 
@@ -68,7 +70,7 @@ const UpdateProfile = ({
 
   return (
     <div className="p-6 bg-white rounded-lg shadow-lg w-full max-w-md">
-      {isLoading && <p>Loading profile...</p>}
+      {isLoading && <p>{t('profile.loading')}</p>}
 
       <form
         onSubmit={handleSubmit(onSubmit)}
@@ -77,34 +79,34 @@ const UpdateProfile = ({
         <FormInput
           name="fullname"
           control={control}
-          label="Full Name"
+          label={t('profile.fullname')}
           type="text"
           icon={User}
-          placeholder="Enter your full name"
+          placeholder={t('profile.placeholders.fullname')}
         />
         <FormInput
           name="email"
           control={control}
-          label="Email"
+          label={t('profile.email')}
           type="email"
           icon={Mail}
-          placeholder="Enter your email"
+          placeholder={t('profile.placeholders.email')}
         />
         <FormInput
           name="username"
           control={control}
-          label="Username"
+          label={t('profile.username')}
           type="text"
           icon={User}
-          placeholder="Enter your username"
+          placeholder={t('profile.placeholders.username')}
         />
 
         <div className="mt-4 flex justify-end gap-2">
           <Button variant="outline" onClick={() => setUpdateProfileModalOpen(false)}>
-            Cancel
+            {t('common.cancel')}
           </Button>
           <Button type="submit" isPending={isUpdating}>
-            Update Profile
+            {t('profile.updateTitle')}
           </Button>
         </div>
       </form>

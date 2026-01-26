@@ -3,9 +3,11 @@ import { Input } from '@/components/ui/input/input'
 import type { IUser } from '@/types/user'
 import { useQuery } from '@tanstack/react-query'
 import { useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
 
 const SearchPage = () => {
+  const { t } = useTranslation()
   const [search, setSearch] = useState('')
   const {
     data: usersData,
@@ -20,8 +22,8 @@ const SearchPage = () => {
   return (
     <div>
       <Input value={search} onChange={(e) => setSearch(e.target.value)} />
-      {usersPending && <div>Loading...</div>}
-      {usersError && <div>Error!</div>}
+      {usersPending && <div>{t('common.loading')}</div>}
+      {usersError && <div>{t('common.error')}</div>}
       {usersData?.map((user) => (
         <Link
           key={user.id}

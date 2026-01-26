@@ -24,5 +24,50 @@
     "submitButton": "Sign Up",
     "haveAccount": "Already have an account?",
     "signIn": "Sign In"
+  },
+  "common": {
+    "loading": "Loading...",
+    "error": "Error!",
+    "cancel": "Cancel",
+    "search": "Search"
+  },
+  "home": {
+    "searchPlaceholder": "Search",
+    "loading": "Loading chats...",
+    "error": "Failed to load chats",
+    "noMessages": "No messages yet"
+  },
+  "profile": {
+    "loading": "Loading profile...",
+    "errorTitle": "Profile load error",
+    "errorDesc": "Please try again later",
+    "updateTitle": "Update Profile",
+    "changePassword": "Change Password",
+    "contactInfo": "Contact Information",
+    "username": "Username",
+    "fullname": "Full Name",
+    "email": "Email",
+    "successUpdate": "Profile updated successfully",
+    "errorUpdate": "Failed to update profile",
+    "placeholders": {
+      "fullname": "Enter your full name",
+      "email": "Enter your email",
+      "username": "Enter your username"
+    }
+  },
+  "password": {
+    "successUpdate": "Password updated successfully",
+    "errorUpdate": "Failed to update password",
+    "old": "Old Password",
+    "new": "New Password",
+    "confirm": "Confirm New Password",
+    "placeholderOld": "Enter your old password",
+    "placeholderNew": "Enter your new password",
+    "placeholderConfirm": "Confirm your new password",
+    "updateButton": "Update Password"
+  },
+  "chat": {
+    "editing": "Editing message",
+    "placeholder": "Type a message..."
   }
 }

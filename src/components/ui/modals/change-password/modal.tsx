@@ -7,6 +7,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { useMutation } from '@tanstack/react-query'
 import { Lock } from 'lucide-react'
 import { useForm } from 'react-hook-form'
+import { useTranslation } from 'react-i18next'
 import { toast } from 'sonner'
 
 interface IChangePasswordProps {
@@ -18,14 +19,15 @@ const ChangePassword = ({
   changePasswordModalOpen,
   setChangePasswordModalOpen,
 }: IChangePasswordProps) => {
+  const { t } = useTranslation()
   const { mutate: changePassword, isPending: isUpdating } = useMutation({
     mutationFn: changePasswordApi,
     onSuccess: () => {
-      toast.success('Password updated successfully')
+      toast.success(t('password.successUpdate'))
       setChangePasswordModalOpen(false)
     },
     onError: () => {
-      toast.error('Failed to update password')
+      toast.error(t('password.errorUpdate'))
     },
   })
 
@@ -54,34 +56,34 @@ const ChangePassword = ({
         <FormInput
           name="oldPassword"
           control={control}
-          label="Old Password"
+          label={t('password.old')}
           type="password"
           icon={Lock}
-          placeholder="Enter your old password"
+          placeholder={t('password.placeholderOld')}
         />
         <FormInput
           name="newPassword"
           control={control}
-          label="New Password"
+          label={t('password.new')}
           type="password"
           icon={Lock}
-          placeholder="Enter your new password"
+          placeholder={t('password.placeholderNew')}
         />
         <FormInput
           name="confirmPassword"
           control={control}
-          label="Confirm New Password"
+          label={t('password.confirm')}
           type="password"
           icon={Lock}
-          placeholder="Enter your new password"
+          placeholder={t('password.placeholderConfirm')}
         />
 
         <div className="mt-4 flex justify-end gap-2">
           <Button variant="outline" onClick={() => setChangePasswordModalOpen(false)}>
-            Cancel
+            {t('common.cancel')}
           </Button>
           <Button type="submit" isPending={isUpdating}>
-            Update Profile
+            {t('password.updateButton')}
           </Button>
         </div>
       </form>

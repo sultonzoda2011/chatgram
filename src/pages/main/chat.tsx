@@ -6,9 +6,11 @@ import type { IChatItem } from '@/types/chat'
 import type { IChatMessage } from '@/types/message'
 import { useQuery } from '@tanstack/react-query'
 import { useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { useParams } from 'react-router-dom'
 
 const ChatPage = () => {
+  const { t } = useTranslation()
   const user = useAuthUser()
   const params = useParams()
   const [messageId, setMessageId] = useState('')
@@ -23,8 +25,8 @@ const ChatPage = () => {
     refetchInterval: 4000,
   })
   const selectedChat = chatsData?.find((chat) => chat.id === Number(params.id))
-  if (isPending) return <div>Loading...</div>
-  if (isError) return <div>Error!</div>
+  if (isPending) return <div>{t('common.loading')}</div>
+  if (isError) return <div>{t('common.error')}</div>
 
   return (
     <div>

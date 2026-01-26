@@ -5,6 +5,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { RefreshCcw, Send } from 'lucide-react'
 import { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
+import { useTranslation } from 'react-i18next'
 import { useParams } from 'react-router-dom'
 
 interface IMessageInputProps {
@@ -17,6 +18,7 @@ interface IMessageInputProps {
 const MessageInput = ({ content, setContent, messageId, setMessageId }: IMessageInputProps) => {
   const queryClient = useQueryClient()
   const { id } = useParams()
+  const { t } = useTranslation()
 
   const { control, handleSubmit, reset, setValue, watch } = useForm({
     defaultValues: { content: content || '' },
@@ -65,7 +67,7 @@ const MessageInput = ({ content, setContent, messageId, setMessageId }: IMessage
           <div className="flex items-center justify-between bg-yellow-100 px-2 py-1 rounded text-sm text-yellow-800 font-medium w-full max-w-xs">
             <div className="flex items-center gap-1">
               <RefreshCcw className="w-4 h-4" />
-              Редактирование сообщения
+              {t('chat.editing')}
             </div>
             <Button
               type="button"
@@ -85,7 +87,7 @@ const MessageInput = ({ content, setContent, messageId, setMessageId }: IMessage
           name="content"
           type="text"
           onKeyDown={handleKeyDown}
-          placeholder="Введите сообщение..."
+          placeholder={t('chat.placeholder')}
         />
         <Button
           type="submit"
