@@ -12,6 +12,7 @@ import { useTranslation } from 'react-i18next'
 import { Link, useParams } from 'react-router-dom'
 import { motion } from 'motion/react'
 import { ArrowLeft, MoreVertical, Phone, Video } from 'lucide-react'
+import { getChatsApi } from '@/api/chatApi'
 
 const ChatPage = () => {
   const { t } = useTranslation()
@@ -21,6 +22,7 @@ const ChatPage = () => {
   const [content, setContent] = useState('')
   const { data: chatsData } = useQuery<IChatItem[]>({
     queryKey: ['chats'],
+    queryFn: getChatsApi,
   })
   const { data, isPending, isError, refetch } = useQuery<IChatMessage[]>({
     queryKey: ['chat', params.id],
@@ -87,7 +89,7 @@ const ChatPage = () => {
         </div>
       </motion.header>
 
-      <div className="flex-1 overflow-hidden bg-gradient-to-b from-background to-accent/20">
+      <div className="flex-1 overflow-y-auto bg-gradient-to-b from-background to-accent/20">
         <MessageList
           messages={data || []}
           userId={user?.id}
