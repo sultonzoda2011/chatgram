@@ -1,5 +1,7 @@
 import { useQuery } from '@tanstack/react-query'
 import { getProfileApi } from '@/api/profileApi'
+import { Loading } from '@/components/ui/loading'
+import { ErrorDisplay } from '@/components/ui/error'
 import type { IProfile } from '@/types/profile'
 import { Mail, User, Edit2 } from 'lucide-react'
 import UpdateProfile from '@/components/ui/modals/modal'
@@ -15,6 +17,7 @@ const ProfilePage = () => {
     data: profileData,
     isLoading,
     isError,
+    refetch,
   } = useQuery<IProfile>({
     queryKey: ['profile'],
     queryFn: getProfileApi,
@@ -26,26 +29,17 @@ const ProfilePage = () => {
   const getFirstLetter = () => profileData?.fullname?.charAt(0).toUpperCase() || '?'
 
   if (isLoading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-background">
-        <div className="text-center">
-          <div className="animate-spin mb-4">
-            <div className="w-16 h-16 border-4 border-border border-t-primary rounded-full"></div>
-          </div>
-          <p className="text-foreground text-lg">{t('profile.loading')}</p>
-        </div>
-      </div>
-    )
+    return <Loading fullscreen size="lg" text={t('profile.loading')} />
   }
 
   if (isError) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-background">
-        <div className="bg-destructive/20 border border-destructive/50 rounded-2xl p-8 max-w-md text-center">
-          <p className="text-destructive text-lg font-semibold">{t('profile.errorTitle')}</p>
-          <p className="text-destructive/70 text-sm mt-2">{t('profile.errorDesc')}</p>
-        </div>
-      </div>
+      <ErrorDisplay 
+        fullscreen
+        title={t('profile.errorTitle')}
+        message={t('profile.errorDesc')}
+        onRetry={() => refetch()}
+      />
     )
   }
 
