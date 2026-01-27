@@ -1,6 +1,7 @@
 import { Eye, EyeOff, type LucideIcon } from 'lucide-react'
 import { useState } from 'react'
 import { Controller, type Control, type FieldPath, type FieldValues } from 'react-hook-form'
+import { motion, AnimatePresence } from 'motion/react'
 
 import { Button } from '@/components/ui/button/button'
 import { Label } from '@/components/ui/label'
@@ -34,28 +35,39 @@ const FormInput = <T extends FieldValues>({
       name={name}
       control={control}
       render={({ field, fieldState }) => (
-        <div className="flex flex-col gap-2">
-          <Label
-            htmlFor={name}
-            className={cn(
-              'text-sm font-medium transition-colors duration-300',
-              isFocused ? 'text-primary' : 'text-muted-foreground',
-            )}
-          >
-            {label}
-          </Label>
+        <motion.div
+          className="flex flex-col gap-2"
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.3 }}
+        >
+          {label && (
+            <Label
+              htmlFor={name}
+              className={cn(
+                'transition-colors duration-200',
+                isFocused ? 'text-primary' : 'text-foreground',
+              )}
+            >
+              {label}
+            </Label>
+          )}
 
           <div className="relative group">
             {Icon && (
-              <div
+              <motion.div
                 className={cn(
-                  'absolute left-4 top-1/2 -translate-y-1/2 transition-colors duration-300 z-10',
-                  isFocused ? 'text-primary' : 'text-muted-foreground/60',
+                  'absolute left-4 top-1/2 -translate-y-1/2 z-10',
+                  isFocused ? 'text-primary' : 'text-muted-foreground',
                   fieldState.error && 'text-destructive',
                 )}
+                animate={{
+                  scale: isFocused ? 1.1 : 1,
+                }}
+                transition={{ duration: 0.2 }}
               >
                 <Icon size={20} strokeWidth={2} />
-              </div>
+              </motion.div>
             )}
 
             <Input
@@ -71,44 +83,70 @@ const FormInput = <T extends FieldValues>({
                 setIsFocused(false)
               }}
               className={cn(
-                'transition-all duration-300',
                 type === 'password' && 'pr-12',
                 Icon && 'pl-12',
                 fieldState.error &&
-                  'border-destructive focus:border-destructive focus:ring-destructive/10',
+                  'border-destructive focus-visible:ring-destructive/30',
               )}
             />
 
             {type === 'password' && (
-              <Button
-                type="button"
-                variant="ghost"
-                size="icon-sm"
-                className={cn(
-                  'absolute right-2 top-1/2 -translate-y-1/2 shadow-none transition-colors duration-300',
-                  isFocused ? 'text-primary' : 'text-muted-foreground/60',
-                )}
-                onClick={() => setEyeOpen((prev) => !prev)}
+              <motion.div
+                className="absolute right-2 top-1/2 -translate-y-1/2"
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.95 }}
               >
-                {eyeOpen ? <Eye size={20} /> : <EyeOff size={20} />}
-              </Button>
+                <Button
+                  type="button"
+                  variant="ghost"
+                  size="icon-sm"
+                  className={cn(
+                    'shadow-none transition-colors duration-200',
+                    isFocused ? 'text-primary' : 'text-muted-foreground',
+                  )}
+                  onClick={() => setEyeOpen((prev) => !prev)}
+                >
+                  <AnimatePresence mode="wait">
+                    <motion.div
+                      key={eyeOpen ? 'eye' : 'eye-off'}
+                      initial={{ opacity: 0, rotate: -90 }}
+                      animate={{ opacity: 1, rotate: 0 }}
+                      exit={{ opacity: 0, rotate: 90 }}
+                      transition={{ duration: 0.15 }}
+                    >
+                      {eyeOpen ? <Eye size={20} /> : <EyeOff size={20} />}
+                    </motion.div>
+                  </AnimatePresence>
+                </Button>
+              </motion.div>
             )}
 
-            <div
-              className={cn(
-                'absolute inset-0 rounded-xl bg-primary/5 -z-10 transition-all duration-300',
-                isFocused ? 'opacity-100 scale-[1.02]' : 'opacity-0 scale-95',
-              )}
+            <motion.div
+              className="absolute inset-0 rounded-lg bg-primary/5 -z-10"
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{
+                opacity: isFocused ? 1 : 0,
+                scale: isFocused ? 1.01 : 0.95,
+              }}
+              transition={{ duration: 0.2 }}
             />
           </div>
 
-          {fieldState.error && (
-            <div className="flex items-center gap-2">
-              <span className="w-1 h-1 rounded-full bg-destructive" />
-              <p className="text-sm text-destructive font-medium">{fieldState.error.message}</p>
-            </div>
-          )}
-        </div>
+          <AnimatePresence>
+            {fieldState.error && (
+              <motion.div
+                className="flex items-center gap-2"
+                initial={{ opacity: 0, y: -5 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -5 }}
+                transition={{ duration: 0.2 }}
+              >
+                <span className="w-1 h-1 rounded-full bg-destructive" />
+                <p className="text-sm text-destructive font-medium">{fieldState.error.message}</p>
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </motion.div>
       )}
     />
   )
