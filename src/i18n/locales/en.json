@@ -28,6 +28,7 @@
   "common": {
     "loading": "Loading...",
     "error": "Error!",
+    "logout": "Log Out",
     "cancel": "Cancel",
     "search": "Search"
   },
