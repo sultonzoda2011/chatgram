@@ -81,7 +81,7 @@ const ProfilePage = () => {
             onClick={() => setUpdateProfileModalOpen(true)}
             variant="default"
             size="default"
-            className="flex-1 rounded-lg"
+            className="flex-1  rounded-lg"
           >
             <Edit2 size={18} />
             {t('profile.updateTitle')}
@@ -90,7 +90,7 @@ const ProfilePage = () => {
             onClick={() => setChangePasswordModalOpen(true)}
             variant="outline"
             size="default"
-            className="flex-1 rounded-lg"
+            className="flex-1 bg-blue-500 hover:bg-blue-600 rounded-lg"
           >
             <Lock size={18} />
             {t('profile.changePassword')}
@@ -99,7 +99,7 @@ const ProfilePage = () => {
             onClick={handleLogout}
             variant="destructive"
             size="default"
-            className="flex-1 rounded-lg"
+            className="flex-1 bg-red-500 hover:bg-red-600 rounded-lg"
           >
             <LogOut size={18} />
             {t('common.logout') || 'Logout'}
