@@ -31,16 +31,17 @@ const App = () => {
         {
           path: '/search',
           element: <SearchPage />,
-        },{
+        },
+        {
           path: '/profile',
           element: <ProfilePage />,
-        }
+        },
       ],
     },
-     {
-          path: '/chat/:id',
-          element: <ChatPage />,
-        },
+    {
+      path: '/chat/:id',
+      element: <ChatPage />,
+    },
     {
       path: '/login',
       element: <LoginPage />,
