@@ -2,11 +2,12 @@ import { sendMessagesApi, updateMessagesApi } from '@/api/messageApi'
 import { Button } from '@/components/ui/button/button'
 import FormInput from '@/components/ui/input/formInput'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
-import { RefreshCcw, Send } from 'lucide-react'
+import { RefreshCcw, Send, X } from 'lucide-react'
 import { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { useTranslation } from 'react-i18next'
 import { useParams } from 'react-router-dom'
+import { motion, AnimatePresence } from 'motion/react'
 
 interface IMessageInputProps {
   messageId?: string
@@ -61,26 +62,41 @@ const MessageInput = ({ content, setContent, messageId, setMessageId }: IMessage
   }
 
   return (
-    <div className="bg-white sticky bottom-0 w-full p-4 rounded-lg shadow-sm border border-gray-200 ">
+    <motion.div
+      className="bg-card/95 backdrop-blur-lg sticky bottom-0 w-full p-4 rounded-lg shadow-lg border border-border"
+      initial={{ y: 100, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ type: "spring", stiffness: 300, damping: 30 }}
+    >
       <form onSubmit={handleSubmit(onSubmit)} className="flex items-center gap-2">
-        {messageId && (
-          <div className="flex items-center justify-between bg-yellow-100 px-2 py-1 rounded text-sm text-yellow-800 font-medium w-full max-w-xs">
-            <div className="flex items-center gap-1">
-              <RefreshCcw className="w-4 h-4" />
-              {t('chat.editing')}
-            </div>
-            <Button
-              type="button"
-              onClick={() => {
-                setMessageId?.('')
-                setContent?.('')
-              }}
-              className="ml-2 text-yellow-800  font-bold hover:text-yellow-600 "
+        <AnimatePresence>
+          {messageId && (
+            <motion.div
+              className="flex items-center justify-between bg-accent/50 backdrop-blur-sm px-3 py-2 rounded-lg text-sm text-accent-foreground font-medium border border-border w-full max-w-xs"
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -20 }}
+              transition={{ duration: 0.2 }}
             >
-              ×
-            </Button>
-          </div>
-        )}
+              <div className="flex items-center gap-2">
+                <RefreshCcw className="w-4 h-4" />
+                {t('chat.editing')}
+              </div>
+              <Button
+                type="button"
+                variant="ghost"
+                size="icon-sm"
+                onClick={() => {
+                  setMessageId?.('')
+                  setContent?.('')
+                }}
+                className="ml-2 hover:bg-destructive/20"
+              >
+                <X className="w-4 h-4" />
+              </Button>
+            </motion.div>
+          )}
+        </AnimatePresence>
 
         <FormInput
           control={control}
@@ -91,19 +107,14 @@ const MessageInput = ({ content, setContent, messageId, setMessageId }: IMessage
         />
         <Button
           type="submit"
-          className="px-4 py-2 rounded bg-blue-600 hover:bg-blue-700 text-white flex items-center gap-1"
+          size="icon"
           disabled={isSending || isUpdating || !watch('content')}
+          isPending={isSending || isUpdating}
         >
-          {isSending || isUpdating ? (
-            <span className="animate-spin">⏳</span>
-          ) : messageId ? (
-            <RefreshCcw />
-          ) : (
-            <Send />
-          )}
+          {messageId ? <RefreshCcw className="w-5 h-5" /> : <Send className="w-5 h-5" />}
         </Button>
       </form>
-    </div>
+    </motion.div>
   )
 }
 
