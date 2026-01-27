@@ -7,8 +7,15 @@
     "passwordLabel": "Password",
     "passwordPlaceholder": "Enter your password",
     "submitButton": "Sign In",
+    "forgotPassword": "Forgot password?",
     "noAccount": "Don't have an account?",
-    "signUp": "Sign Up"
+    "signUp": "Sign Up",
+    "termsText": "By continuing, you agree to our",
+    "terms": "Terms of Use",
+    "and": "and",
+    "privacy": "Privacy Policy",
+    "brandName": "ChatGram",
+    "divider": "or"
   },
   "register": {
     "title": "Sign Up",
@@ -23,7 +30,12 @@
     "passwordPlaceholder": "Enter your password",
     "submitButton": "Sign Up",
     "haveAccount": "Already have an account?",
-    "signIn": "Sign In"
+    "signIn": "Sign In",
+    "terms": "By continuing, you agree to our",
+    "and": "and",
+    "divider":"or",
+    "privacy": "Privacy Policy",
+    "termsText": "Terms of Use"
   },
   "common": {
     "loading": "Loading...",

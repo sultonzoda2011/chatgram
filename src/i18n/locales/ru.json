@@ -3,27 +3,39 @@
     "title": "Вход",
     "subtitle": "С возвращением! Пожалуйста, войдите, чтобы продолжить.",
     "usernameLabel": "Имя пользователя",
-    "usernamePlaceholder": "Введите имя пользователя",
+    "usernamePlaceholder": "Введите ваше имя пользователя",
     "passwordLabel": "Пароль",
-    "passwordPlaceholder": "Введите пароль",
+    "passwordPlaceholder": "Введите ваш пароль",
     "submitButton": "Войти",
+    "forgotPassword": "Забыли пароль?",
     "noAccount": "Нет аккаунта?",
-    "signUp": "Зарегистрироваться"
+    "signUp": "Регистрация",
+    "termsText": "Продолжая, вы соглашаетесь с нашими",
+    "terms": "Условиями использования",
+    "and": "и",
+    "privacy": "Политикой конфиденциальности",
+    "brandName": "ChatGram",
+    "divider": "или"
   },
   "register": {
     "title": "Регистрация",
     "subtitle": "Добро пожаловать! Пожалуйста, зарегистрируйтесь, чтобы продолжить.",
     "usernameLabel": "Имя пользователя",
-    "usernamePlaceholder": "Введите имя пользователя",
+    "usernamePlaceholder": "Введите ваше имя пользователя",
     "fullnameLabel": "Полное имя",
-    "fullnamePlaceholder": "Введите полное имя",
+    "fullnamePlaceholder": "Введите ваше полное имя",
     "emailLabel": "Электронная почта",
-    "emailPlaceholder": "Введите электронную почту",
+    "emailPlaceholder": "Введите ваш email",
     "passwordLabel": "Пароль",
-    "passwordPlaceholder": "Введите пароль",
+    "passwordPlaceholder": "Введите ваш пароль",
     "submitButton": "Зарегистрироваться",
     "haveAccount": "Уже есть аккаунт?",
-    "signIn": "Войти"
+    "signIn": "Войти",
+    "terms": "Продолжая, вы соглашаетесь с нашими",
+    "and": "и",
+    "divider": "или",
+    "privacy": "Политикой конфиденциальности",
+    "termsText": "Условиями использования"
   },
   "common": {
     "loading": "Загрузка...",
@@ -35,7 +47,7 @@
   "home": {
     "searchPlaceholder": "Поиск",
     "loading": "Загрузка чатов...",
-    "error": "Ошибка загрузки чатов",
+    "error": "Не удалось загрузить чаты",
     "noMessages": "Сообщений пока нет"
   },
   "profile": {
@@ -43,21 +55,21 @@
     "errorTitle": "Ошибка загрузки профиля",
     "errorDesc": "Пожалуйста, попробуйте позже",
     "updateTitle": "Обновить профиль",
-    "changePassword": "Изменить пароль",
+    "changePassword": "Сменить пароль",
     "contactInfo": "Контактная информация",
     "username": "Имя пользователя",
     "fullname": "Полное имя",
     "email": "Электронная почта",
-    "successUpdate": "Профиль успешно обновлен",
+    "successUpdate": "Профиль успешно обновлён",
     "errorUpdate": "Не удалось обновить профиль",
     "placeholders": {
       "fullname": "Введите ваше полное имя",
       "email": "Введите ваш email",
-      "username": "Введите имя пользователя"
+      "username": "Введите ваше имя пользователя"
     }
   },
   "password": {
-    "successUpdate": "Пароль успешно обновлен",
+    "successUpdate": "Пароль успешно обновлён",
     "errorUpdate": "Не удалось обновить пароль",
     "old": "Старый пароль",
     "new": "Новый пароль",

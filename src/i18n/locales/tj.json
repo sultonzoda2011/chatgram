@@ -1,64 +1,76 @@
 {
   "login": {
     "title": "Вуруд",
-    "subtitle": "Хуш омадед боз! Лутфан барои идома ворид шавед.",
+    "subtitle": "Хуш омадед! Лутфан ворид шавед, то идома диҳед.",
     "usernameLabel": "Номи корбар",
-    "usernamePlaceholder": "Номи корбарро ворид кунед",
+    "usernamePlaceholder": "Номи корбариро ворид кунед",
     "passwordLabel": "Рамз",
-    "passwordPlaceholder": "Рамзро ворид кунед",
-    "submitButton": "Ворид шудан",
+    "passwordPlaceholder": "Рамзи худро ворид кунед",
+    "submitButton": "Вуруд",
+    "forgotPassword": "Рамзро фаромӯш кардед?",
     "noAccount": "Ҳисоб надоред?",
-    "signUp": "Сабти ном"
+    "signUp": "Сабти ном",
+    "termsText": "Бо идома додан, шумо розӣ ҳастед бо",
+    "terms": "Шартҳои истифодабарӣ",
+    "and": "ва",
+    "privacy": "Сиёсати махфият",
+    "brandName": "ChatGram",
+    "divider": "ё"
   },
   "register": {
     "title": "Сабти ном",
-    "subtitle": "Хуш омадед! Лутфан барои идома сабти ном шавед.",
+    "subtitle": "Хуш омадед! Лутфан сабти ном кунед, то идома диҳед.",
     "usernameLabel": "Номи корбар",
-    "usernamePlaceholder": "Номи корбарро ворид кунед",
+    "usernamePlaceholder": "Номи корбариро ворид кунед",
     "fullnameLabel": "Номи пурра",
-    "fullnamePlaceholder": "Номи пурраро ворид кунед",
+    "fullnamePlaceholder": "Номи пурраи худро ворид кунед",
     "emailLabel": "Почтаи электронӣ",
-    "emailPlaceholder": "Почтаи электрониро ворид кунед",
+    "emailPlaceholder": "Почтаи худро ворид кунед",
     "passwordLabel": "Рамз",
-    "passwordPlaceholder": "Рамзро ворид кунед",
+    "passwordPlaceholder": "Рамзи худро ворид кунед",
     "submitButton": "Сабти ном",
-    "haveAccount": "Аллакай ҳисоб доред?",
-    "signIn": "Ворид шудан"
+    "haveAccount": "Аломате доред?",
+    "signIn": "Вуруд",
+    "terms": "Бо идома додан, шумо розӣ ҳастед бо",
+    "and": "ва",
+    "divider": "ё",
+    "privacy": "Сиёсати махфият",
+    "termsText": "Шартҳои истифодабарӣ"
   },
   "common": {
     "loading": "Боргирӣ...",
-    "error": "Хатогӣ!",
-    "logout": "Баромадан",
+    "error": "Хато!",
+    "logout": "Хориҷ шудан",
     "cancel": "Бекор кардан",
     "search": "Ҷустуҷӯ"
   },
   "home": {
     "searchPlaceholder": "Ҷустуҷӯ",
-    "loading": "Боргирии чатҳо...",
-    "error": "Хатогии боргирии чатҳо",
-    "noMessages": "Ҳоло паём нест"
+    "loading": "Боргирии сӯҳбатҳо...",
+    "error": "Намудан сӯҳбатҳо имконнопазир аст",
+    "noMessages": "Ҳанӯз паём нест"
   },
   "profile": {
     "loading": "Боргирии профил...",
-    "errorTitle": "Хатогии боргирии профил",
-    "errorDesc": "Лутфан, баъдтар кӯшиш кунед",
+    "errorTitle": "Хатои боргирии профил",
+    "errorDesc": "Лутфан баъдтар кӯшиш кунед",
     "updateTitle": "Навсозии профил",
-    "changePassword": "Иваз кардани рамз",
+    "changePassword": "Тағйири рамз",
     "contactInfo": "Маълумоти тамос",
     "username": "Номи корбар",
     "fullname": "Номи пурра",
     "email": "Почтаи электронӣ",
-    "successUpdate": "Профил бомуваффақият навсозӣ шуд",
-    "errorUpdate": "Навсозии профил иҷро нашуд",
+    "successUpdate": "Профил бо муваффақият навсозӣ шуд",
+    "errorUpdate": "Навсозии профил имконнопазир аст",
     "placeholders": {
       "fullname": "Номи пурраи худро ворид кунед",
-      "email": "Почтаи электронии худро ворид кунед",
+      "email": "Почтаи худро ворид кунед",
       "username": "Номи корбариро ворид кунед"
     }
   },
   "password": {
-    "successUpdate": "Рамз бомуваффақият навсозӣ шуд",
-    "errorUpdate": "Навсозии рамз иҷро нашуд",
+    "successUpdate": "Рамз бо муваффақият навсозӣ шуд",
+    "errorUpdate": "Навсозии рамз имконнопазир аст",
     "old": "Рамзи кӯҳна",
     "new": "Рамзи нав",
     "confirm": "Тасдиқи рамзи нав",
@@ -68,7 +80,7 @@
     "updateButton": "Навсозии рамз"
   },
   "chat": {
-    "editing": "Таҳрири паём",
+    "editing": "Дар ҳоли таҳрир паём",
     "placeholder": "Паём нависед..."
   }
 }
