@@ -11,10 +11,13 @@ import { Lock, User } from 'lucide-react'
 import { useForm } from 'react-hook-form'
 import { useTranslation } from 'react-i18next'
 import { Link, useNavigate } from 'react-router-dom'
+import { motion } from 'motion/react'
 import { toast } from 'sonner'
+import logo from '@/assets/logo.png'
 const LoginPage = () => {
   const navigate = useNavigate()
   const { t } = useTranslation()
+
   const { mutate, isPending } = useMutation({
     mutationFn: loginApi,
     onSuccess: (res) => {
@@ -26,6 +29,7 @@ const LoginPage = () => {
       toast.error(err.message)
     },
   })
+
   const { control, handleSubmit } = useForm<ILogin>({
     defaultValues: {
       username: '',
@@ -33,45 +37,230 @@ const LoginPage = () => {
     },
     resolver: zodResolver(LoginSchema),
   })
+
   const onSubmit = (data: ILogin) => {
     mutate(data)
   }
+
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50 p-4">
-      <div className="absolute top-4 right-4">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-background via-background to-accent/10 p-4 relative overflow-hidden">
+      <motion.div
+        className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-chart-2/5 opacity-50"
+        animate={{
+          backgroundPosition: ['0% 0%', '100% 100%'],
+        }}
+        transition={{
+          duration: 15,
+          repeat: Infinity,
+          repeatType: 'reverse',
+        }}
+      />
+
+      <motion.div
+        className="absolute -top-40 -left-40 w-80 h-80 bg-primary/10 rounded-full blur-3xl"
+        animate={{
+          scale: [1, 1.2, 1],
+          opacity: [0.2, 0.4, 0.2],
+        }}
+        transition={{
+          duration: 12,
+          repeat: Infinity,
+          ease: 'easeInOut',
+        }}
+      />
+
+      <motion.div
+        className="absolute top-4 right-4 z-50"
+        initial={{ opacity: 0, x: 20 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.5, delay: 0.2 }}
+      >
         <LanguageSwitcher />
-      </div>
-      <div className="w-full max-w-md p-6 bg-white rounded-lg shadow-md">
-        <h2 className="text-2xl font-semibold mb-4">{t('login.title')}</h2>
-        <p className="mb-4 text-gray-500">{t('login.subtitle')}</p>
-        <form className="flex flex-col gap-4" onSubmit={handleSubmit(onSubmit)}>
-          <FormInput
-            name="username"
-            control={control}
-            label={t('login.usernameLabel')}
-            type="text"
-            placeholder={t('login.usernamePlaceholder')}
-            icon={User}
+      </motion.div>
+
+      <motion.div
+        className="w-full max-w-md relative z-10"
+        initial={{ opacity: 0, y: 20, scale: 0.95 }}
+        animate={{ opacity: 1, y: 0, scale: 1 }}
+        transition={{ duration: 0.5, type: 'spring', stiffness: 300, damping: 30 }}
+      >
+        <motion.div
+          initial={{ opacity: 0, y: -30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.1 }}
+          className="text-center mb-10"
+        >
+          <img
+            src={logo}
+            alt={t('login.brandName')}
+            className="w-20 h-20 mx-auto mb-4 text-primary"
           />
-          <FormInput
-            name="password"
-            control={control}
-            label={t('login.passwordLabel')}
-            type="password"
-            placeholder={t('login.passwordPlaceholder')}
-            icon={Lock}
+
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+          >
+            <h1 className="text-4xl font-black bg-gradient-to-r from-primary via-primary to-chart-2 bg-clip-text text-transparent mb-2 tracking-tight">
+              ChatGram
+            </h1>
+            <div className="h-1 w-16 bg-gradient-to-r from-primary to-chart-2 mx-auto rounded-full mb-3" />
+            <p className="text-sm font-medium text-chart-1 tracking-widest uppercase">
+              {t('login.subtitle')}
+            </p>
+          </motion.div>
+        </motion.div>
+
+        <div className="bg-card/95 backdrop-blur-xl rounded-2xl shadow-2xl border border-border p-8 overflow-hidden relative">
+          <motion.div
+            className="absolute -top-1 -left-1 w-64 h-64 bg-gradient-to-br from-primary/20 to-chart-2/20 rounded-full blur-3xl"
+            animate={{
+              scale: [1, 1.2, 1],
+              opacity: [0.3, 0.5, 0.3],
+            }}
+            transition={{
+              duration: 8,
+              repeat: Infinity,
+              ease: 'easeInOut',
+            }}
           />
-          <Button type="submit" isPending={isPending}>
-            {t('login.submitButton')}
-          </Button>
-        </form>
-        <p className="mt-4 text-center text-sm text-gray-500">
-          {t('login.noAccount')}{' '}
-          <Link to="/register" className="font-medium text-blue-500 hover:text-blue-700">
-            {t('login.signUp')}
-          </Link>
-        </p>
-      </div>
+          <motion.div className="relative z-10">
+            <motion.div
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.3 }}
+              className="mb-8"
+            >
+              <h2 className="text-2xl font-bold text-foreground mb-2">{t('login.title')}</h2>
+              <p className="text-sm text-chart-1 font-medium">{t('login.subtitle')}</p>
+            </motion.div>
+
+            <form className="flex flex-col gap-4" onSubmit={handleSubmit(onSubmit)}>
+              <motion.div
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.4, delay: 0.35 }}
+              >
+                <FormInput
+                  name="username"
+                  control={control}
+                  label={t('login.usernameLabel')}
+                  type="text"
+                  placeholder={t('login.usernamePlaceholder')}
+                  icon={User}
+                />
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.4, delay: 0.4 }}
+              >
+                <FormInput
+                  name="password"
+                  control={control}
+                  label={t('login.passwordLabel')}
+                  type="password"
+                  placeholder={t('login.passwordPlaceholder')}
+                  icon={Lock}
+                />
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.4, delay: 0.45 }}
+                className="flex justify-end"
+              >
+                <Link
+                  to="#"
+                  className="text-xs font-medium text-primary hover:text-primary/80 transition-colors duration-200"
+                >
+                  {t('login.forgotPassword')}
+                </Link>
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.4, delay: 0.5 }}
+                className="pt-2"
+              >
+                <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
+                  <Button
+                    type="submit"
+                    isPending={isPending}
+                    className="w-full h-11 bg-gradient-to-br from-primary via-primary to-primary/80 hover:from-primary/90 hover:via-primary/85 hover:to-primary/70 shadow-lg hover:shadow-xl transition-all duration-200 font-semibold text-base"
+                  >
+                    {t('login.submitButton')}
+                  </Button>
+                </motion.div>
+              </motion.div>
+            </form>
+
+            <motion.div
+              initial={{ opacity: 0, scaleX: 0 }}
+              animate={{ opacity: 1, scaleX: 1 }}
+              transition={{ duration: 0.4, delay: 0.55 }}
+              className="flex items-center gap-3 my-6"
+            >
+              <div className="h-px flex-1 bg-border" />
+              <span className="text-xs text-chart-1 font-medium">{t('login.divider')}</span>
+              <div className="h-px flex-1 bg-border" />
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.5, delay: 0.6 }}
+              className="text-center"
+            >
+              <p className="text-sm text-chart-1 mb-3">
+                {t('login.noAccount')}{' '}
+                <Link
+                  to="/register"
+                  className="font-semibold text-primary hover:text-primary/80 transition-colors duration-200 relative inline-block group"
+                >
+                  {t('login.signUp')}
+                  <motion.div
+                    className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-primary to-chart-2 group-hover:w-full transition-all duration-300"
+                    layoutId="underline"
+                  />
+                </Link>
+              </p>
+            </motion.div>
+
+            <motion.p
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.5, delay: 0.65 }}
+              className="text-xs text-chart-1 text-center mt-6 leading-relaxed"
+            >
+              {t('login.termsText')}{' '}
+              <Link to="#" className="text-primary hover:text-primary/80 transition-colors">
+                {t('login.terms')}
+              </Link>{' '}
+              {t('login.and')}{' '}
+              <Link to="#" className="text-primary hover:text-primary/80 transition-colors">
+                {t('login.privacy')}
+              </Link>
+            </motion.p>
+          </motion.div>
+        </div>
+
+        <motion.div
+          className="absolute -bottom-20 -right-20 w-40 h-40 bg-chart-2/10 rounded-full blur-3xl"
+          animate={{
+            scale: [1, 1.3, 1],
+            opacity: [0.2, 0.4, 0.2],
+          }}
+          transition={{
+            duration: 10,
+            repeat: Infinity,
+            ease: 'easeInOut',
+          }}
+        />
+      </motion.div>
     </div>
   )
 }
