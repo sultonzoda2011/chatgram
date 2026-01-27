@@ -75,7 +75,7 @@ const ChatsPage = () => {
                     to={`/chat/${chat.id}`}
                     className="flex items-center gap-3 px-4 py-4 hover:bg-accent/50 transition-colors active:bg-accent"
                   >
-                    <div className="w-10 h-10 bg-gradient-to-br from-primary to-chart-2 rounded-lg flex items-center justify-center text-primary-foreground font-bold text-lg flex-shrink-0">
+                    <div className="w-10 h-10 bg-linear-to-br from-primary to-chart-2 rounded-lg flex items-center justify-center text-primary-foreground font-bold text-lg shrink-0">
                       {chat.fullname.charAt(0).toUpperCase()}
                     </div>
 
