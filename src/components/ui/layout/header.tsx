@@ -6,7 +6,6 @@ import LanguageSwitcher from '@/components/ui/languageSwitcher'
 
 const Header = () => {
   const { theme, setTheme } = useTheme()
-
   return (
     <motion.header
       className="sticky top-0 z-50 bg-card/95 backdrop-blur-lg border-b border-border shadow-sm"
