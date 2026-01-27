@@ -1,37 +1,59 @@
 import { Home, MessageCircle, Search, User } from "lucide-react"
 import { NavLink } from "react-router-dom"
+import { motion } from "motion/react"
 
 const navItems = [
-  { to: "/", icon: Home },
-  { to: "/chats", icon: MessageCircle },
-  { to: "/search", icon: Search },
-  { to: "/profile", icon: User },
+  { to: "/", icon: Home, label: "Home" },
+  { to: "/chats", icon: MessageCircle, label: "Chats" },
+  { to: "/search", icon: Search, label: "Search" },
+  { to: "/profile", icon: User, label: "Profile" },
 ]
-
-const navItemBase =
-  "flex items-center justify-center flex-1 h-12 transition-colors duration-200"
 
 const BottomNav = () => {
   return (
-    <div className="fixed bottom-0 left-0 right-0 z-50">
-      <div className="flex w-full bg-white/80 backdrop-blur-xl border-t border-white/20">
-        {navItems.map(({ to, icon: Icon }) => (
+    <motion.div
+      className="fixed bottom-0 left-0 right-0 z-50"
+      initial={{ y: 100 }}
+      animate={{ y: 0 }}
+      transition={{ type: "spring", stiffness: 300, damping: 30 }}
+    >
+      <div className="flex w-full bg-card/95 backdrop-blur-lg border-t border-border shadow-2xl">
+        {navItems.map(({ to, icon: Icon, label }) => (
           <NavLink
             key={to}
             to={to}
-          className={({ isActive }) =>
-              `${navItemBase} ${
+            className={({ isActive }) =>
+              `flex flex-col items-center justify-center flex-1 h-16 transition-colors duration-200 relative group ${
                 isActive
-                  ? "bg-primary text-white shadow-lg scale-110"
-                  : "text-gray-500 hover:text-primary hover:scale-110"
-              } rounded-full mx-1`
+                  ? "text-primary"
+                  : "text-muted-foreground hover:text-foreground"
+              }`
             }
           >
-            <Icon size={22} />
+            {({ isActive }) => (
+              <>
+                {isActive && (
+                  <motion.div
+                    layoutId="active-indicator"
+                    className="absolute top-0 left-0 right-0 h-0.5 bg-primary"
+                    transition={{ type: "spring", stiffness: 400, damping: 30 }}
+                  />
+                )}
+                <motion.div
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.95 }}
+                  transition={{ duration: 0.2 }}
+                  className="flex flex-col items-center gap-1"
+                >
+                  <Icon size={20} strokeWidth={isActive ? 2.5 : 2} />
+                  <span className="text-xs font-medium">{label}</span>
+                </motion.div>
+              </>
+            )}
           </NavLink>
         ))}
       </div>
-    </div>
+    </motion.div>
   )
 }
 
