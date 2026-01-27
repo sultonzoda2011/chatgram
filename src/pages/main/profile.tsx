@@ -1,16 +1,17 @@
 import { useQuery } from '@tanstack/react-query'
 import { getProfileApi } from '@/api/profileApi'
-import { Loading } from '@/components/ui/loading'
+import { Loading } from '@/components/ui'
 import { ErrorDisplay } from '@/components/ui/error'
 import type { IProfile } from '@/types/profile'
-import { Mail, User, Edit2 } from 'lucide-react'
-import UpdateProfile from '@/components/ui/modals/modal'
+import { Mail, User, Edit2, Lock, LogOut } from 'lucide-react'
+import UpdateProfile from '@/components/ui/modals/update-profile/modal'
 import { useState } from 'react'
 import { Button } from '@/components/ui/button/button'
 import ChangePassword from '@/components/ui/modals/change-password/modal'
-import LanguageSwitcher from '@/components/ui/languageSwitcher'
-import { ModeToggle } from '@/components/mode-toggle'
 import { useTranslation } from 'react-i18next'
+import { motion } from 'motion/react'
+import { removeToken } from '@/lib/utils/cookie'
+import { useNavigate } from 'react-router-dom'
 
 const ProfilePage = () => {
   const {
@@ -22,91 +23,127 @@ const ProfilePage = () => {
     queryKey: ['profile'],
     queryFn: getProfileApi,
   })
+  const navigate = useNavigate()
   const [changePasswordModalOpen, setChangePasswordModalOpen] = useState(false)
   const [updateProfileModalOpen, setUpdateProfileModalOpen] = useState(false)
   const { t } = useTranslation()
 
   const getFirstLetter = () => profileData?.fullname?.charAt(0).toUpperCase() || '?'
 
+  const handleLogout = () => {
+    removeToken()
+    navigate('/login')
+  }
+
   if (isLoading) {
-    return <Loading fullscreen size="lg" text={t('profile.loading')} />
+    return <Loading text={t('profile.loading')} className="p-8" />
   }
 
   if (isError) {
     return (
-      <ErrorDisplay 
-        fullscreen
+      <ErrorDisplay
         title={t('profile.errorTitle')}
         message={t('profile.errorDesc')}
         onRetry={() => refetch()}
+        className="m-4"
       />
     )
   }
 
   return (
-    <div className="min-h-screen p-4 sm:p-8 bg-background text-foreground">
-      <div className="max-w-2xl mx-auto space-y-6">
-        <LanguageSwitcher />
-        <ModeToggle />
-        <div className="bg-card rounded-3xl shadow-lg p-8 flex flex-col sm:flex-row items-center gap-6">
-          <div className="bg-primary text-background w-32 h-32 rounded-full flex items-center justify-center ring-4 ring-ring shadow-lg shrink-0">
-            <span className="text-6xl font-bold text-card-foreground">{getFirstLetter()}</span>
-          </div>
+    <div className="h-full flex flex-col">
+      <div className="flex-1 overflow-y-auto p-4 space-y-4">
+        <motion.div
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0 }}
+          className="bg-card rounded-xl border border-border p-6 shadow-sm hover:shadow-md transition-all"
+        >
+          <div className="flex items-center gap-4">
+            <div className="w-16 h-16 bg-gradient-to-br from-primary to-chart-2 rounded-lg flex items-center justify-center text-primary-foreground font-bold text-2xl shrink-0">
+              {getFirstLetter()}
+            </div>
 
-          <div className="flex-1 text-center sm:text-left">
-            <h1 className="text-4xl font-bold mb-2">{profileData?.fullname}</h1>
-            <p className="text-muted-foreground text-lg flex items-center gap-2 justify-center sm:justify-start">
-              <User size={18} /> @{profileData?.username}
-            </p>
-            <Button
-              onClick={() => setUpdateProfileModalOpen(true)}
-              variant="default"
-              size="default"
-              className="mt-4"
-            >
-              <Edit2 size={20} /> {t('profile.updateTitle')}
-            </Button>
-            <Button
-              onClick={() => setChangePasswordModalOpen(true)}
-              variant="outline"
-              size="default"
-              className="mt-4 ml-4"
-            >
-              {t('profile.changePassword')}
-            </Button>
-          </div>
-        </div>
-
-        <div className="bg-card rounded-3xl shadow-lg p-8 space-y-6">
-          <h2 className="text-2xl font-bold mb-6">{t('profile.contactInfo')}</h2>
-
-          <div>
-            <label className="text-muted-foreground text-sm font-semibold mb-2 flex items-center gap-2">
-              <User size={16} /> {t('profile.username')}
-            </label>
-            <div className="bg-popover border border-border rounded-xl p-4 text-foreground text-lg">
-              @{profileData?.username}
+            <div className="flex-1">
+              <h1 className="text-2xl font-bold text-foreground">{profileData?.fullname}</h1>
+              <p className="text-sm text-muted-foreground">@{profileData?.username}</p>
             </div>
           </div>
+        </motion.div>
 
-          <div>
-            <label className="flex gap-2 items-center text-muted-foreground text-sm font-semibold mb-2">
-              <User size={16} /> {t('profile.fullname')}
+        <motion.div
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.1 }}
+          className="flex gap-3"
+        >
+          <Button
+            onClick={() => setUpdateProfileModalOpen(true)}
+            variant="default"
+            size="default"
+            className="flex-1 rounded-lg"
+          >
+            <Edit2 size={18} />
+            {t('profile.updateTitle')}
+          </Button>
+          <Button
+            onClick={() => setChangePasswordModalOpen(true)}
+            variant="outline"
+            size="default"
+            className="flex-1 rounded-lg"
+          >
+            <Lock size={18} />
+            {t('profile.changePassword')}
+          </Button>
+          <Button
+            onClick={handleLogout}
+            variant="destructive"
+            size="default"
+            className="flex-1 rounded-lg"
+          >
+            <LogOut size={18} />
+            {t('common.logout') || 'Logout'}
+          </Button>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.2 }}
+          className="space-y-3"
+        >
+          <h2 className="text-lg font-semibold text-foreground px-1">{t('profile.contactInfo')}</h2>
+
+          <div className="bg-card rounded-xl border border-border p-4 shadow-sm hover:shadow-md transition-all">
+            <label className="flex items-center gap-2 text-xs text-muted-foreground font-semibold mb-2">
+              <User size={14} />
+              {t('profile.username')}
             </label>
-            <div className="bg-popover border border-border rounded-xl p-4 text-foreground text-lg">
-              {profileData?.fullname}
-            </div>
+            <p className="text-foreground text-sm font-medium">@{profileData?.username}</p>
           </div>
 
-          <div>
-            <label className="text-muted-foreground text-sm font-semibold mb-2 flex items-center gap-2">
-              <Mail size={16} /> {t('profile.email')}
+          <div className="bg-card rounded-xl border border-border p-4 shadow-sm hover:shadow-md transition-all">
+            <label className="flex items-center gap-2 text-xs text-muted-foreground font-semibold mb-2">
+              <User size={14} />
+              {t('profile.fullname')}
             </label>
-            <div className="bg-popover border border-border rounded-xl p-4 text-foreground text-lg break-all">
-              {profileData?.email}
-            </div>
+            <p className="text-foreground text-sm font-medium">{profileData?.fullname}</p>
           </div>
-        </div>
+
+          <div className="bg-card rounded-xl border border-border p-4 shadow-sm hover:shadow-md transition-all">
+            <label className="flex items-center gap-2 text-xs text-muted-foreground font-semibold mb-2">
+              <Mail size={14} />
+              {t('profile.email')}
+            </label>
+            <p className="text-foreground text-sm font-medium break-all">{profileData?.email}</p>
+          </div>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.3 }}
+        ></motion.div>
       </div>
 
       <UpdateProfile
