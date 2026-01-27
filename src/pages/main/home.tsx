@@ -1,44 +1,48 @@
 import { getChatsApi } from '@/api/chatApi'
-import { Input } from '@/components/ui/input/input'
-import { formatDate } from '@/lib/utils/date'
+import { Loading } from '@/components/ui'
+import { ErrorDisplay } from '@/components/ui/error'
 import type { IChatItem } from '@/types/chat'
 import { useQuery } from '@tanstack/react-query'
-import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { Link } from 'react-router-dom'
+import { motion } from 'motion/react'
+import UserItem from '@/components/ui/userItem'
 
 const HomePage = () => {
   const { t } = useTranslation()
-  const { data: chatsData, isPending: chatsPending, error: chatsError } = useQuery<IChatItem[]>({
+  const {
+    data: chatsData,
+    isPending: chatsPending,
+    error: chatsError,
+    refetch,
+  } = useQuery<IChatItem[]>({
     queryKey: ['chats'],
     queryFn: getChatsApi,
     refetchInterval: 10000,
   })
-  const [search, setSearch] = useState('')
-  const filteredChats = chatsData?.filter((chat) =>
-    chat.fullname.toLowerCase().includes(search.toLowerCase()),
-  )
-  if (chatsPending) return <div className="p-4">{t('home.loading')}</div>
-  if (chatsError) return <div className="p-4 text-red-500">{t('home.error')}</div>
+
+  if (chatsPending) return <Loading text={t('home.loading')} className="p-8" />
+  if (chatsError)
+    return (
+      <ErrorDisplay
+        title={t('home.error')}
+        error={chatsError}
+        onRetry={() => refetch()}
+        className="m-4"
+      />
+    )
 
   return (
-    <div>
-      <Input aria-label="Search chats" value={search} placeholder={t('home.searchPlaceholder')} onChange={(e) => setSearch(e.target.value)} />
-      <div className="flex flex-col gap-2">
-        {filteredChats?.map((chat) => (
-          <Link
+    <div className="p-4 space-y-6">
+      <div className="space-y-3">
+        {chatsData?.map((chat, index) => (
+          <motion.div
             key={chat.id}
-            to={`/chat/${chat.id}`}
-            className="flex items-center justify-between px-4 py-3 hover:bg-gray-100 transition"
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: index * 0.1 }}
           >
-            <div>
-              <h3 className="font-medium">{chat.fullname}</h3>
-              <p className="text-sm text-gray-500 truncate">
-                {chat.last_message || t('home.noMessages')}
-              </p>
-            </div>
-            <p>{formatDate(chat.date)}</p>
-          </Link>
+            <UserItem chat={chat} index={index} />
+          </motion.div>
         ))}
       </div>
     </div>
