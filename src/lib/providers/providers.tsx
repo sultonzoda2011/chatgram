@@ -12,7 +12,7 @@ const Providers = ({ children }: { children: ReactNode }) => {
     <QueryClientProvider client={queryClient}>
       <I18nextProvider i18n={i18n}>
         <Toaster closeButton richColors />
-        <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
+        <ThemeProvider defaultTheme="dark" storageKey="theme">
           {children}
         </ThemeProvider>
       </I18nextProvider>
