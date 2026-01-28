@@ -18,8 +18,8 @@ const errorVariants = cva(
         lg: 'text-lg gap-4',
       },
       fullscreen: {
-        true: 'fixed inset-0 bg-background z-50',
-        false: 'p-4 rounded-lg border border-border bg-card',
+        true: 'fixed inset-0 bg-background/40 backdrop-blur-xl z-[100]',
+        false: 'p-8 rounded-3xl border border-border/50 bg-card/60 backdrop-blur-md shadow-2xl',
       },
     },
     defaultVariants: {
@@ -87,7 +87,7 @@ export function ErrorDisplay({
           )}
         />
       )}
-      
+
       <div className="space-y-2">
         <h3 className="font-semibold text-lg text-foreground">{title}</h3>
         {errorMessage && (
@@ -98,9 +98,9 @@ export function ErrorDisplay({
       {onRetry && (
         <Button
           onClick={onRetry}
-          variant="outline"
-          size={size === 'md' ? 'default' : (size as any)}
-          className="mt-2"
+          variant="default"
+          size={size === 'md' ? 'default' : (size )}
+          className="mt-4 bg-linear-to-br from-primary to-chart-2 hover:shadow-lg hover:shadow-primary/20 transition-all duration-300 rounded-xl px-8"
         >
           <RefreshCw className="h-4 w-4 mr-2" />
           {retryText}
@@ -138,7 +138,7 @@ export function ErrorInline({
 }) {
   return (
     <div className={cn('flex items-center gap-2 text-sm text-destructive', className)}>
-      <AlertCircle className="h-4 w-4 flex-shrink-0" />
+      <AlertCircle className="h-4 w-4 shrink-0" />
       <span>{message}</span>
     </div>
   )
