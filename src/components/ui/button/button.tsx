@@ -56,7 +56,7 @@ const Button = React.forwardRef<
       whileHover={{ scale: disabled || isPending ? 1 : 1.02 }}
       whileTap={{ scale: disabled || isPending ? 1 : 0.98 }}
       transition={{ type: 'spring', stiffness: 400, damping: 20 }}
-      {...props}
+      {...(props as any)}
     >
       <span className="flex items-center justify-center gap-2">
         {isPending && <Loader2 className="animate-spin" />}

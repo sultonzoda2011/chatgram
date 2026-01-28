@@ -99,7 +99,7 @@ export function ErrorDisplay({
         <Button
           onClick={onRetry}
           variant="outline"
-          size={size}
+          size={size === 'md' ? 'default' : (size as any)}
           className="mt-2"
         >
           <RefreshCw className="h-4 w-4 mr-2" />
