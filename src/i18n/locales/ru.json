@@ -99,6 +99,7 @@
   },
   "bottomNav": {
     "home": "Главная",
+    "chats": "Чаты",
     "search": "Поиск",
     "profile": "Профиль"
   }

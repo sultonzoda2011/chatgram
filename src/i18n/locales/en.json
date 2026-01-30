@@ -33,7 +33,7 @@
     "signIn": "Sign In",
     "terms": "By continuing, you agree to our",
     "and": "and",
-    "divider":"or",
+    "divider": "or",
     "privacy": "Privacy Policy",
     "termsText": "Terms of Use"
   },
@@ -99,6 +99,7 @@
   },
   "bottomNav": {
     "home": "Home",
+    "chats": "Chats",
     "search": "Search",
     "profile": "Profile"
   }
