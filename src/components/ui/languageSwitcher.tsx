@@ -44,7 +44,7 @@ export const LanguageSwitcher = () => {
         asChild
         variant="outline"
         onClick={toggleOpen}
-        className="relative flex items-center gap-2 px-2.5 py-2.5 h-auto rounded-lg bg-background/50 hover:bg-background/80 backdrop-blur-lg border border-border shadow-sm overflow-hidden group"
+        className="relative flex items-center gap-2 px-2.5 py-2.5 h-auto rounded-lg  backdrop-blur-lg border border-border shadow-sm overflow-hidden group"
       >
         <button className="flex items-center gap-2">
           <div className="sm:hidden relative">
