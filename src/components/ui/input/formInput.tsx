@@ -84,7 +84,7 @@ const FormInput = <T extends FieldValues>({
                 setIsFocused(false)
               }}
               className={cn(
-                'w-full h-10 bg-gradient-to-br from-card/80 to-card/60 hover:from-card/90 hover:to-card/70 transition-all duration-200',
+                'w-full h-10 bg-linear-to-br from-card/80 to-card/60 hover:from-card/90 hover:to-card/70 transition-all duration-200',
                 'border border-border hover:border-border/80 focus-visible:border-primary',
                 'focus-visible:ring-2 focus-visible:ring-primary/20 focus-visible:ring-offset-0',
                 'text-foreground placeholder:text-muted-foreground/60',
@@ -128,7 +128,7 @@ const FormInput = <T extends FieldValues>({
             )}
 
             <motion.div
-              className="absolute inset-0 rounded-lg bg-gradient-to-br from-primary/5 to-primary/0 -z-10 blur-md"
+              className="absolute inset-0 rounded-lg bg-linear-to-br from-primary/5 to-primary/0 -z-10 blur-md"
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{
                 opacity: isFocused ? 1 : 0,
