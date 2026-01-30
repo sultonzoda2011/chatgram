@@ -30,7 +30,7 @@ const MessageList = ({ messages, userId, setMessageId, setContent }: MessageList
   })
 
   return (
-    <div className="flex flex-col gap-3 p-4 pb-2 overflow-y-auto flex-1">
+    <div className="flex flex-col gap-3 p-4 pb-2">
       <AnimatePresence>
         {messages.map((message, index) => {
           const isOwnMessage = message.from_user_id === userId

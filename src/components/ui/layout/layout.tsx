@@ -18,7 +18,7 @@ const Layout = () => {
 
   return (
     <motion.div
-      className="flex flex-col md:flex-row min-h-screen bg-linear-to-br from-background via-background to-accent/10 relative overflow-hidden"
+      className={`flex flex-col md:flex-row ${isChatPage ? 'h-screen' : 'min-h-screen'} bg-linear-to-br from-background via-background to-accent/10 relative overflow-hidden`}
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5 }}
@@ -37,9 +37,9 @@ const Layout = () => {
 
       <Sidebar />
 
-      <div className="flex-1 flex flex-col relative z-10">
+      <div className={`flex-1 flex flex-col relative z-10 ${isChatPage ? 'h-full' : ''}`}>
         {!isChatPage && <Header />}
-        <main className={`flex-1 relative ${!isChatPage ? 'pb-20 md:pb-0' : ''}`}>
+        <main className={`flex-1 relative ${!isChatPage ? 'pb-20 md:pb-0' : 'h-full'}`}>
           <Outlet />
         </main>
         {!isChatPage && (

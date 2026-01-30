@@ -7,7 +7,7 @@ import Layout from '@/components/ui/layout/layout'
 import ChatPage from '@/pages/main/chat'
 import SearchPage from '@/pages/main/search'
 import ProfilePage from '@/pages/main/profile'
-import ChatLayout from '@/components/ui/layout/chatLayout'
+import ChatsPage from '@/pages/main/chats'
 
 const App = () => {
   const router = createBrowserRouter([
@@ -24,20 +24,9 @@ const App = () => {
           element: <HomePage />,
         },
         {
-          path: '/',
-          element: <ChatLayout />,
-          children: [
-            {
-              path: '/chats',
-              element: null, 
-            },
-            {
-              path: '/chat/:id',
-              element: <ChatPage />,
-            },
-          ]
+          path: '/chats',
+          element: <ChatsPage />,
         },
-
         {
           path: '/search',
           element: <SearchPage />,
@@ -45,6 +34,10 @@ const App = () => {
         {
           path: '/profile',
           element: <ProfilePage />,
+        },
+        {
+          path: '/chat/:id',
+          element: <ChatPage />,
         },
       ],
     },

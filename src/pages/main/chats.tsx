@@ -1,6 +1,6 @@
 import { getChatsApi } from '@/api/chatApi'
 import { Input } from '@/components/ui/input/input'
-import { Loading } from '@/components/ui'
+import {  Loading } from '@/components/ui'
 import { ErrorDisplay } from '@/components/ui/error'
 import type { IChatItem } from '@/types/chat'
 import { useQuery } from '@tanstack/react-query'
@@ -8,7 +8,8 @@ import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { motion } from 'motion/react'
 import UserItem from '@/components/ui/userItem'
-import { MessageCircle, Search } from 'lucide-react'
+import { ArrowLeft,  MessageCircle, Search } from 'lucide-react'
+import { Link } from 'react-router-dom'
 
 const ChatsPage = () => {
   const { t } = useTranslation()
@@ -39,21 +40,41 @@ const ChatsPage = () => {
 
   return (
     <div className="h-full flex flex-col max-w-5xl mx-auto w-full">
-      <div className="p-4 bg-background/40 backdrop-blur-md sticky top-0 z-40 border-b border-border/50">
-        <div className="relative group">
-          <Search
-            className="absolute left-4 top-1/2 -translate-y-1/2 text-chart-1 group-focus-within:text-primary transition-colors duration-200"
-            size={18}
-          />
-          <Input
-            aria-label="Search chats"
-            value={search}
-            placeholder={t('home.searchPlaceholder')}
-            onChange={(e) => setSearch(e.target.value)}
-            className="pl-12 bg-card/60 border-border/50 rounded-2xl h-12 focus:ring-primary/20 focus:border-primary/30 transition-all duration-300 shadow-sm"
-          />
-        </div>
-      </div>
+
+  <div className="sticky top-0 z-40 bg-background/70 backdrop-blur-xl border-b border-border/40">
+  <div className="flex items-center  px-4 py-3 max-w-5xl mx-auto">
+
+    <Link
+      to="/"
+      className="p-2 rounded-xl hover:bg-accent/30 transition"
+    >
+      <ArrowLeft className="w-5 h-5" />
+    </Link>
+
+
+
+    <div className="relative ml-auto w-full max-w-xs group">
+      <Search
+        size={18}
+        className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground
+        group-focus-within:text-primary transition"
+      />
+      <Input
+        value={search}
+        onChange={(e) => setSearch(e.target.value)}
+        placeholder={t('home.searchPlaceholder')}
+        className="
+          pl-10 h-10 rounded-xl
+          bg-card/70 border-border/40
+          focus-visible:ring-2 focus-visible:ring-primary/30
+          transition
+        "
+      />
+    </div>
+
+  </div>
+</div>
+
 
       <div className="flex-1 overflow-y-auto p-4">
         {filteredChats && filteredChats.length === 0 ? (
@@ -61,7 +82,7 @@ const ChatsPage = () => {
             <div className="w-20 h-20 rounded-full bg-accent/20 flex items-center justify-center">
               <MessageCircle size={40} className="text-chart-1" />
             </div>
-            <p className="text-chart-1 font-medium">{t('chats.noFound') || 'No chats found'}</p>
+            <p className="text-chart-1 font-medium">{t('chats.noFound')}</p>
           </div>
         ) : (
           <div className="space-y-3">
@@ -70,11 +91,11 @@ const ChatsPage = () => {
                 key={chat.id}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ 
-                  type: "spring",
+                transition={{
+                  type: 'spring',
                   stiffness: 300,
                   damping: 30,
-                  delay: index * 0.05 
+                  delay: index * 0.05,
                 }}
               >
                 <UserItem chat={chat} index={index} />

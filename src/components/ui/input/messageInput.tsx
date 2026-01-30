@@ -63,7 +63,7 @@ const MessageInput = ({ content, setContent, messageId, setMessageId }: IMessage
 
   return (
     <motion.div
-      className="bg-card/40 backdrop-blur-xl border-t border-border/50 pt-4 pb-2 px-4 z-40"
+      className="bg-card/40 backdrop-blur-xl border-t border-border/50 pt-4 pb-2 px-4 sticky bottom-0 z-40"
       initial={{ y: 100, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ type: "spring", stiffness: 300, damping: 30 }}

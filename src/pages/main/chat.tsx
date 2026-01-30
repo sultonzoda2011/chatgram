@@ -82,13 +82,12 @@ const ChatPage = () => {
               <div className="w-10 h-10 bg-primary rounded-xl flex items-center justify-center text-primary-foreground font-bold text-lg shrink-0 shadow-lg group-hover:scale-105 transition-transform duration-300">
                 {selectedChat?.fullname.charAt(0).toUpperCase()}
               </div>
-
             </div>
             <div>
-              <h1 className="font-bold text-foreground leading-none mb-1 group-hover:text-primary transition-colors">{selectedChat?.fullname}</h1>
-              <div className="flex items-center gap-1.5">
-
-              </div>
+              <h1 className="font-bold text-foreground leading-none mb-1 group-hover:text-primary transition-colors">
+                {selectedChat?.fullname}
+              </h1>
+              <div className="flex items-center gap-1.5"></div>
             </div>
           </div>
 
@@ -119,7 +118,7 @@ const ChatPage = () => {
       </motion.header>
 
       <div className="flex-1 overflow-y-auto relative z-10 custom-scrollbar">
-        <div className="max-w-5xl mx-auto w-full h-full">
+        <div className="max-w-5xl mx-auto w-full">
           <MessageList
             messages={data || []}
             userId={user?.id}
@@ -129,16 +128,12 @@ const ChatPage = () => {
         </div>
       </div>
 
-      <div className="relative z-50">
-        <div className="max-w-5xl mx-auto w-full">
-          <MessageInput
-            content={content}
-            messageId={messageId}
-            setMessageId={setMessageId}
-            setContent={setContent}
-          />
-        </div>
-      </div>
+      <MessageInput
+        content={content}
+        messageId={messageId}
+        setMessageId={setMessageId}
+        setContent={setContent}
+      />
     </div>
   )
 }
