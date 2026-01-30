@@ -45,10 +45,20 @@
     "search": "Search"
   },
   "home": {
+    "title": "Recent Chats",
+    "subtitle": "Stay connected with your friends",
     "searchPlaceholder": "Search",
     "loading": "Loading chats...",
     "error": "Failed to load chats",
     "noMessages": "No messages yet"
+  },
+  "chats": {
+    "noFound": "No chats found"
+  },
+  "search": {
+    "placeholder": "Search for people...",
+    "startTitle": "Find New Friends",
+    "startDesc": "Search by username or name to start a conversation"
   },
   "profile": {
     "loading": "Loading profile...",
@@ -82,5 +92,14 @@
   "chat": {
     "editing": "Editing message",
     "placeholder": "Type a message..."
+  },
+  "chatsLayout": {
+    "selectChat": "Select a chat to start messaging",
+    "selectChatMessage": "Choose a conversation from the list on the left to view messages."
+  },
+  "bottomNav": {
+    "home": "Home",
+    "search": "Search",
+    "profile": "Profile"
   }
 }
