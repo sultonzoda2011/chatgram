@@ -18,7 +18,7 @@ const loadingVariants = cva(
         xl: 'text-xl',
       },
       fullscreen: {
-        true: 'fixed inset-0 bg-background/80 backdrop-blur-sm z-50 flex-col',
+        true: 'fixed inset-0 bg-background/40 backdrop-blur-xl z-[100] flex-col',
         false: '',
       },
     },
