@@ -85,7 +85,7 @@ export function LoadingDots({
   }[variant || 'default']
 
   return (
-    <div className={cn('inline-flex items-center gap-1', className)}>
+    <div className={cn('inline-flex justify-center items-center gap-1', className)}>
       <span
         className={cn(
           'rounded-full animate-bounce',
