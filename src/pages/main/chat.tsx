@@ -36,50 +36,79 @@ const ChatPage = () => {
     return <ErrorDisplay title={t('common.error')} onRetry={() => refetch()} fullscreen />
 
   return (
-    <div className="flex flex-col h-screen bg-background">
+    <div className="flex flex-col h-full bg-background relative overflow-hidden">
+      <motion.div
+        className="absolute inset-0 bg-linear-to-br from-primary/5 via-transparent to-chart-2/5 opacity-50 pointer-events-none"
+        animate={{
+          backgroundPosition: ['0% 0%', '100% 100%'],
+        }}
+        transition={{
+          duration: 15,
+          repeat: Infinity,
+          repeatType: 'reverse',
+        }}
+      />
+      <motion.div
+        className="absolute -top-40 -left-40 w-80 h-80 bg-primary/10 rounded-full blur-3xl pointer-events-none"
+        animate={{
+          scale: [1, 1.2, 1],
+          opacity: [0.2, 0.4, 0.2],
+        }}
+        transition={{
+          duration: 12,
+          repeat: Infinity,
+          ease: 'easeInOut',
+        }}
+      />
+
       <motion.header
-        className="sticky top-0 z-50 bg-card/95 backdrop-blur-lg border-b border-border px-4 py-3"
+        className="sticky top-0 z-50 bg-card/80 backdrop-blur-xl border-b border-border/50 px-4 py-3 shadow-sm"
         initial={{ y: -100 }}
         animate={{ y: 0 }}
         transition={{ type: 'spring', stiffness: 300, damping: 30 }}
       >
-        <div className="flex items-center justify-between">
+        <div className="flex items-center justify-between max-w-4xl mx-auto w-full">
           <div className="flex items-center gap-3">
-            <Link to="/chats">
+            <Link to="/chats" className="md:hidden">
               <motion.button
-                className="p-2 -ml-2 rounded-full hover:bg-accent transition-colors"
+                className="p-2 -ml-2 rounded-xl hover:bg-primary/10 text-primary transition-colors"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
                 <ArrowLeft size={20} />
               </motion.button>
             </Link>
-              <div className="w-10 h-10 bg-gradient-to-br from-primary to-chart-2 rounded-lg flex items-center justify-center text-primary-foreground font-bold text-lg flex-shrink-0">
-          {selectedChat?.fullname.charAt(0).toUpperCase()}
-        </div>
+            <div className="relative group">
+              <div className="w-10 h-10 bg-primary rounded-xl flex items-center justify-center text-primary-foreground font-bold text-lg shrink-0 shadow-lg group-hover:scale-105 transition-transform duration-300">
+                {selectedChat?.fullname.charAt(0).toUpperCase()}
+              </div>
+
+            </div>
             <div>
-              <h1 className="font-semibold text-foreground">{selectedChat?.fullname}</h1>
-              <p className="text-xs text-chart-1">Online</p>
+              <h1 className="font-bold text-foreground leading-none mb-1 group-hover:text-primary transition-colors">{selectedChat?.fullname}</h1>
+              <div className="flex items-center gap-1.5">
+
+              </div>
             </div>
           </div>
 
           <div className="flex items-center gap-1">
             <motion.button
-              className="p-2 rounded-full hover:bg-accent transition-colors"
+              className="p-2 rounded-xl hover:bg-primary/10 text-chart-1 hover:text-primary transition-colors"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
               <Phone size={18} />
             </motion.button>
             <motion.button
-              className="p-2 rounded-full hover:bg-accent transition-colors"
+              className="p-2 rounded-xl hover:bg-primary/10 text-chart-1 hover:text-primary transition-colors"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
               <Video size={18} />
             </motion.button>
             <motion.button
-              className="p-2 rounded-full hover:bg-accent transition-colors"
+              className="p-2 rounded-xl hover:bg-primary/10 text-chart-1 hover:text-primary transition-colors"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
@@ -89,22 +118,26 @@ const ChatPage = () => {
         </div>
       </motion.header>
 
-      <div className="flex-1 overflow-y-auto bg-gradient-to-b from-background to-accent/20">
-        <MessageList
-          messages={data || []}
-          userId={user?.id}
-          setMessageId={setMessageId}
-          setContent={setContent}
-        />
+      <div className="flex-1 overflow-y-auto relative z-10 custom-scrollbar">
+        <div className="max-w-5xl mx-auto w-full h-full">
+          <MessageList
+            messages={data || []}
+            userId={user?.id}
+            setMessageId={setMessageId}
+            setContent={setContent}
+          />
+        </div>
       </div>
 
-      <div className="border-t border-border bg-card">
-        <MessageInput
-          content={content}
-          messageId={messageId}
-          setMessageId={setMessageId}
-          setContent={setContent}
-        />
+      <div className="relative z-50">
+        <div className="max-w-5xl mx-auto w-full">
+          <MessageInput
+            content={content}
+            messageId={messageId}
+            setMessageId={setMessageId}
+            setContent={setContent}
+          />
+        </div>
       </div>
     </div>
   )
