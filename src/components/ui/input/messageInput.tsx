@@ -63,30 +63,24 @@ const MessageInput = ({ content, setContent, messageId, setMessageId }: IMessage
 
   return (
     <motion.div
-      className=" bg-gradient-to-t from-background via-background/95 to-transparent pt-6 pb-4 px-4 z-40"
+      className="bg-card/40 backdrop-blur-xl border-t border-border/50 pt-4 pb-2 px-4 z-40"
       initial={{ y: 100, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ type: "spring", stiffness: 300, damping: 30 }}
     >
-      <div className="max-w-3xl mx-auto">
+      <div className="max-w-5xl mx-auto">
         <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-3">
           <AnimatePresence>
             {messageId && (
               <motion.div
-                className="flex items-center justify-between bg-gradient-to-r from-amber-500/10 to-orange-500/10 backdrop-blur-sm px-4 py-2.5 rounded-lg text-sm text-amber-600 dark:text-amber-400 font-semibold border border-amber-500/20 hover:border-amber-500/40 transition-colors"
-                initial={{ opacity: 0, x: -20, y: 10 }}
-                animate={{ opacity: 1, x: 0, y: 0 }}
-                exit={{ opacity: 0, x: -20, y: 10 }}
-                transition={{ duration: 0.2 }}
+                className="flex items-center justify-between bg-primary/10 backdrop-blur-md px-4 py-2 rounded-2xl text-sm text-primary font-bold border border-primary/20"
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.95 }}
               >
                 <div className="flex items-center gap-2">
-                  <motion.div
-                    animate={{ rotate: 360 }}
-                    transition={{ duration: 2, repeat: Infinity, ease: 'linear' }}
-                  >
-                    <RefreshCcw className="w-4 h-4" />
-                  </motion.div>
-                  <span>{t('chat.editing')}</span>
+                  <RefreshCcw className="w-4 h-4 animate-spin" />
+                  <span className="uppercase tracking-widest text-[10px]">{t('chat.editing')}</span>
                 </div>
                 <Button
                   type="button"
@@ -96,22 +90,23 @@ const MessageInput = ({ content, setContent, messageId, setMessageId }: IMessage
                     setMessageId?.('')
                     setContent?.('')
                   }}
-                  className="ml-2 hover:bg-destructive/20 transition-colors"
+                  className="h-6 w-6 rounded-full hover:bg-destructive/20 text-destructive transition-colors"
                 >
-                  <X className="w-4 h-4" />
+                  <X className="w-3.5 h-3.5" />
                 </Button>
               </motion.div>
             )}
           </AnimatePresence>
 
-          <div className="flex items-end gap-2.5">
-            <div className="flex-1 w-full">
+          <div className="flex items-center gap-3">
+            <div className="flex-1">
               <FormInput
                 control={control}
                 name="content"
                 type="text"
                 onKeyDown={handleKeyDown}
                 placeholder={t('chat.placeholder')}
+
               />
             </div>
             <motion.div
@@ -123,14 +118,9 @@ const MessageInput = ({ content, setContent, messageId, setMessageId }: IMessage
                 size="icon"
                 disabled={isSending || isUpdating || !watch('content')}
                 isPending={isSending || isUpdating}
-                className="h-10 w-10 shrink-0 bg-gradient-to-br from-primary via-primary to-primary/80 hover:from-primary/90 hover:via-primary/85 hover:to-primary/70 shadow-lg hover:shadow-xl transition-all duration-200 rounded-lg flex items-center justify-center"
+                className="h-12 w-12 shrink-0 bg-linear-to-br from-primary via-primary to-chart-2 shadow-lg shadow-primary/20 rounded-2xl flex items-center justify-center"
               >
-                <motion.div
-                  animate={{ rotate: messageId ? 360 : 0 }}
-                  transition={{ duration: messageId ? 0.6 : 0, repeat: messageId ? Infinity : 0 }}
-                >
-                  {messageId ? <RefreshCcw className="w-5 h-5" /> : <Send className="w-5 h-5" />}
-                </motion.div>
+                {messageId ? <RefreshCcw className="w-5 h-5" /> : <Send className="w-5 h-5" />}
               </Button>
             </motion.div>
           </div>
