@@ -15,6 +15,7 @@ function Input({ className, type, ...props }: React.ComponentProps<"input">) {
       )}
       whileFocus={{ scale: 1.01 }}
       transition={{ type: "spring", stiffness: 400, damping: 25 }}
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       {...(props as any)}
     />
   )
