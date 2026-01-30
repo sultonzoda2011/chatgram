@@ -6,8 +6,8 @@ import { ProtectedRoute } from '@/components/ui/layout/protectedRoute'
 import Layout from '@/components/ui/layout/layout'
 import ChatPage from '@/pages/main/chat'
 import SearchPage from '@/pages/main/search'
-import ChatsPage from '@/pages/main/chats'
 import ProfilePage from '@/pages/main/profile'
+import ChatLayout from '@/components/ui/layout/chatLayout'
 
 const App = () => {
   const router = createBrowserRouter([
@@ -24,8 +24,18 @@ const App = () => {
           element: <HomePage />,
         },
         {
-          path: '/chats',
-          element: <ChatsPage />,
+          path: '/',
+          element: <ChatLayout />,
+          children: [
+            {
+              path: '/chats',
+              element: null, // ChatLayout already renders ChatsPage in the sidebar
+            },
+            {
+              path: '/chat/:id',
+              element: <ChatPage />,
+            },
+          ]
         },
 
         {
@@ -37,10 +47,6 @@ const App = () => {
           element: <ProfilePage />,
         },
       ],
-    },
-    {
-      path: '/chat/:id',
-      element: <ChatPage />,
     },
     {
       path: '/login',
