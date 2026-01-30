@@ -2,14 +2,13 @@ import { getChatsApi } from '@/api/chatApi'
 import { Input } from '@/components/ui/input/input'
 import { Loading } from '@/components/ui'
 import { ErrorDisplay } from '@/components/ui/error'
-import { formatDate } from '@/lib/utils/date'
 import type { IChatItem } from '@/types/chat'
 import { useQuery } from '@tanstack/react-query'
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { Link } from 'react-router-dom'
 import { motion } from 'motion/react'
-import { Search } from 'lucide-react'
+import UserItem from '@/components/ui/userItem'
+import { MessageCircle, Search } from 'lucide-react'
 
 const ChatsPage = () => {
   const { t } = useTranslation()
@@ -39,11 +38,11 @@ const ChatsPage = () => {
     )
 
   return (
-    <div className="h-full flex flex-col">
-      <div className="p-4 bg-background sticky top-15 z-40 border-b border-border">
-        <div className="relative">
+    <div className="h-full flex flex-col max-w-5xl mx-auto w-full">
+      <div className="p-4 bg-background/40 backdrop-blur-md sticky top-0 z-40 border-b border-border/50">
+        <div className="relative group">
           <Search
-            className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground"
+            className="absolute left-4 top-1/2 -translate-y-1/2 text-chart-1 group-focus-within:text-primary transition-colors duration-200"
             size={18}
           />
           <Input
@@ -51,50 +50,36 @@ const ChatsPage = () => {
             value={search}
             placeholder={t('home.searchPlaceholder')}
             onChange={(e) => setSearch(e.target.value)}
-            className="pl-10 bg-accent/50 border-0 rounded-full"
+            className="pl-12 bg-card/60 border-border/50 rounded-2xl h-12 focus:ring-primary/20 focus:border-primary/30 transition-all duration-300 shadow-sm"
           />
         </div>
       </div>
 
-      <div className="flex-1 overflow-y-auto">
+      <div className="flex-1 overflow-y-auto p-4">
         {filteredChats && filteredChats.length === 0 ? (
-          <div className="flex flex-col items-center justify-center h-full text-muted-foreground">
-            <p>No chats found</p>
+          <div className="flex flex-col items-center justify-center h-full text-center space-y-4">
+            <div className="w-20 h-20 rounded-full bg-accent/20 flex items-center justify-center">
+              <MessageCircle size={40} className="text-chart-1" />
+            </div>
+            <p className="text-chart-1 font-medium">{t('chats.noFound') || 'No chats found'}</p>
           </div>
         ) : (
-          <div className="divide-y divide-border">
-            {filteredChats?.map((chat, index) => {
-              return (
-                <motion.div
-                  key={chat.id}
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: index * 0.05 }}
-                >
-                  <Link
-                    to={`/chat/${chat.id}`}
-                    className="flex items-center gap-3 px-4 py-4 hover:bg-accent/50 transition-colors active:bg-accent"
-                  >
-                    <div className="w-10 h-10 bg-linear-to-br from-primary to-chart-2 rounded-lg flex items-center justify-center text-primary-foreground font-bold text-lg shrink-0">
-                      {chat.fullname.charAt(0).toUpperCase()}
-                    </div>
-
-                    <div className="flex-1 min-w-0">
-                      <div className="flex items-center gap-2 mb-1">
-                        <h3 className="font-semibold text-foreground truncate">{chat.fullname}</h3>
-                      </div>
-                      <p className="text-sm text-muted-foreground truncate">
-                        {chat.last_message || t('home.noMessages')}
-                      </p>
-                    </div>
-
-                    <div className="flex flex-col items-end gap-1 shrink-0">
-                      <span className="text-xs text-muted-foreground">{formatDate(chat.date)}</span>
-                    </div>
-                  </Link>
-                </motion.div>
-              )
-            })}
+          <div className="space-y-3">
+            {filteredChats?.map((chat, index) => (
+              <motion.div
+                key={chat.id}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ 
+                  type: "spring",
+                  stiffness: 300,
+                  damping: 30,
+                  delay: index * 0.05 
+                }}
+              >
+                <UserItem chat={chat} index={index} />
+              </motion.div>
+            ))}
           </div>
         )}
       </div>
