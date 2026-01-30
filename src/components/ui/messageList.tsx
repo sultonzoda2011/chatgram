@@ -37,21 +37,23 @@ const MessageList = ({ messages, userId, setMessageId, setContent }: MessageList
           return (
             <motion.div
               key={message.id}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0, scale: 0.9, y: 10 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.9 }}
-              transition={{ duration: 0.2, delay: index * 0.05 }}
+              transition={{ type: "spring", stiffness: 400, damping: 25, delay: index * 0.02 }}
               className={`flex ${isOwnMessage ? 'justify-end' : 'justify-start'}`}
             >
               <div
-                className={`group relative max-w-[70%] rounded-lg p-3 shadow-sm backdrop-blur-sm transition-all duration-200 ${
+                className={`group relative max-w-[75%] rounded-2xl p-4 shadow-lg backdrop-blur-md transition-all duration-300 ${
                   isOwnMessage
-                    ? 'bg-gradient-to-br from-primary to-primary/80 text-primary-foreground hover:shadow-md'
-                    : 'bg-card border border-border hover:border-border/80 hover:shadow-md'
+                    ? 'bg-primary text-primary-foreground rounded-tr-none hover:shadow-primary/20'
+                    : 'bg-card/60 border border-border/50 text-foreground rounded-tl-none hover:border-primary/30'
                 }`}
               >
-                <p className="text-sm break-words leading-relaxed">{message.content}</p>
-                <p className="text-xs mt-2 opacity-70">{formatDate(message.date)}</p>
+                <p className="text-sm wrap-break-word leading-relaxed font-medium">{message.content}</p>
+                <div className="flex items-center justify-end gap-1 mt-1 opacity-60">
+                  <p className="text-[10px] font-bold uppercase tracking-tighter">{formatDate(message.date)}</p>
+                </div>
 
                 {isOwnMessage && (
                   <motion.div
@@ -68,7 +70,7 @@ const MessageList = ({ messages, userId, setMessageId, setContent }: MessageList
                           setMessageId(String(message.id))
                           setContent(message.content)
                         }}
-                        className="shadow-lg hover:shadow-xl transition-shadow"
+                        className="shadow-lg hover:shadow-xl transition-shadow bg-card/90 backdrop-blur-md rounded-lg"
                       >
                         <Edit className="w-3.5 h-3.5" />
                       </Button>
@@ -78,7 +80,7 @@ const MessageList = ({ messages, userId, setMessageId, setContent }: MessageList
                         variant="destructive"
                         size="icon-sm"
                         onClick={() => mutate(message.id)}
-                        className="shadow-lg hover:shadow-xl transition-shadow"
+                        className="shadow-lg hover:shadow-xl transition-shadow rounded-lg"
                       >
                         <Trash2 className="w-3.5 h-3.5" />
                       </Button>
