@@ -1,32 +1,32 @@
-import { Home, MessageCircle, Search, User } from "lucide-react"
-import { NavLink } from "react-router-dom"
-import { motion } from "motion/react"
-
-const navItems = [
-  { to: "/", icon: Home, label: "Home" },
-  { to: "/chats", icon: MessageCircle, label: "Chats" },
-  { to: "/search", icon: Search, label: "Search" },
-  { to: "/profile", icon: User, label: "Profile" },
-]
+import { Home, MessageCircle, Search, User } from 'lucide-react'
+import { NavLink } from 'react-router-dom'
+import { motion } from 'motion/react'
+import { useTranslation } from 'react-i18next';
 
 const BottomNav = () => {
+  const {t} = useTranslation();
+  const navItems = [
+    { to: '/', icon: Home, label: t("bottomNav.home") },
+    { to: '/chats', icon: MessageCircle, label: t("bottomNav.chats") },
+    { to: '/search', icon: Search, label: t("bottomNav.search") },
+    { to: '/profile', icon: User, label: t("bottomNav.profile") },
+  ]
+
   return (
     <motion.div
-      className="fixed bottom-0 left-0 right-0 z-50"
+      className="fixed bottom-0 left-0 right-0 z-50 p-4 pointer-events-none"
       initial={{ y: 100 }}
       animate={{ y: 0 }}
-      transition={{ type: "spring", stiffness: 300, damping: 30 }}
+      transition={{ type: 'spring', stiffness: 300, damping: 30 }}
     >
-      <div className="flex w-full bg-card/95 backdrop-blur-lg border-t border-border shadow-2xl">
+      <div className="max-w-md mx-auto flex w-full bg-card/80 backdrop-blur-xl border border-border shadow-2xl rounded-2xl overflow-hidden pointer-events-auto">
         {navItems.map(({ to, icon: Icon, label }) => (
           <NavLink
             key={to}
             to={to}
             className={({ isActive }) =>
               `flex flex-col items-center justify-center flex-1 h-16 transition-colors duration-200 relative group ${
-                isActive
-                  ? "text-primary"
-                  : "text-muted-foreground hover:text-foreground"
+                isActive ? 'text-primary' : 'text-chart-1 hover:text-foreground'
               }`
             }
           >
@@ -35,8 +35,8 @@ const BottomNav = () => {
                 {isActive && (
                   <motion.div
                     layoutId="active-indicator"
-                    className="absolute top-0 left-0 right-0 h-0.5 bg-primary"
-                    transition={{ type: "spring", stiffness: 400, damping: 30 }}
+                    className="absolute inset-0 bg-primary/5 border-t-2 border-primary"
+                    transition={{ type: 'spring', stiffness: 400, damping: 30 }}
                   />
                 )}
                 <motion.div
