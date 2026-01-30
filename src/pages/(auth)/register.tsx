@@ -46,9 +46,9 @@ const RegisterPage = () => {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-background via-background to-accent/10 p-4 relative overflow-hidden">
+    <div className="min-h-screen flex items-center justify-center bg-linear-to-br from-background via-background to-accent/10 p-4 relative overflow-hidden">
       <motion.div
-        className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-chart-2/5 opacity-50"
+        className="absolute inset-0 bg-linear-to-br from-primary/5 via-transparent to-chart-2/5 opacity-50"
         animate={{
           backgroundPosition: ['0% 0%', '100% 100%'],
         }}
@@ -100,10 +100,10 @@ const RegisterPage = () => {
             animate={{ opacity: 1 }}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
-            <h1 className="text-4xl font-black bg-gradient-to-r from-primary via-primary to-chart-2 bg-clip-text text-transparent mb-2 tracking-tight">
+            <h1 className="text-4xl font-black bg-linear-to-r from-primary via-primary to-chart-2 bg-clip-text text-transparent mb-2 tracking-tight">
               ChatGram
             </h1>
-            <div className="h-1 w-16 bg-gradient-to-r from-primary to-chart-2 mx-auto rounded-full mb-3" />
+            <div className="h-1 w-16 bg-linear-to-r from-primary to-chart-2 mx-auto rounded-full mb-3" />
             <p className="text-sm font-medium text-chart-1 tracking-widest uppercase">
               {t('register.subtitle')}
             </p>
@@ -112,7 +112,7 @@ const RegisterPage = () => {
 
         <div className="bg-card/95 backdrop-blur-xl rounded-2xl shadow-2xl border border-border p-8 overflow-hidden relative">
           <motion.div
-            className="absolute -top-1 -left-1 w-64 h-64 bg-gradient-to-br from-primary/20 to-chart-2/20 rounded-full blur-3xl"
+            className="absolute -top-1 -left-1 w-64 h-64 bg-linear-to-br from-primary/20 to-chart-2/20 rounded-full blur-3xl"
             animate={{
               scale: [1, 1.2, 1],
               opacity: [0.3, 0.5, 0.3],
@@ -206,7 +206,7 @@ const RegisterPage = () => {
                   <Button
                     type="submit"
                     isPending={isPending}
-                    className="w-full h-11 bg-gradient-to-br from-primary via-primary to-primary/80 hover:from-primary/90 hover:via-primary/85 hover:to-primary/70 shadow-lg hover:shadow-xl transition-all duration-200 font-semibold text-base"
+                    className="w-full h-11 bg-linear-to-br from-primary via-primary to-primary/80 hover:from-primary/90 hover:via-primary/85 hover:to-primary/70 shadow-lg hover:shadow-xl transition-all duration-200 font-semibold text-base"
                   >
                     {t('register.submitButton')}
                   </Button>
@@ -239,7 +239,7 @@ const RegisterPage = () => {
                 >
                   {t('register.signIn')}
                   <motion.div
-                    className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-primary to-chart-2 group-hover:w-full transition-all duration-300"
+                    className="absolute bottom-0 left-0 w-0 h-0.5 bg-linear-to-r from-primary to-chart-2 group-hover:w-full transition-all duration-300"
                     layoutId="underline"
                   />
                 </Link>
