@@ -21,29 +21,35 @@ const UserItem = ({ chat, user }: UserItemProps) => {
   return (
     <Link
       to={`/chat/${data?.id}`}
-      className="flex items-center gap-3 p-4 bg-card rounded-xl border border-border hover:shadow-md transition-all"
+      className="flex items-center gap-4 p-4 bg-card/60 backdrop-blur-md rounded-2xl border border-border/50 hover:bg-card/80 hover:border-primary/30 hover:shadow-lg hover:shadow-primary/5 transition-all duration-300 group"
     >
-      <div className="w-10 h-10 bg-linear-to-br from-primary to-chart-2 rounded-lg flex items-center justify-center text-primary-foreground font-bold text-lg shrink-0">
-        {name.charAt(0).toUpperCase()}
+      <div className="relative">
+        <div className="w-12 h-12 bg-primary rounded-xl flex items-center justify-center text-primary-foreground font-bold text-xl shrink-0 shadow-inner group-hover:scale-110 transition-transform duration-300">
+          {name.charAt(0).toUpperCase()}
+        </div>
+
       </div>
       <div className="flex-1 min-w-0">
-        <h3 className="font-semibold text-foreground">{name}</h3>
-        {isChat && lastMessage && (
-          <p className="text-sm text-muted-foreground truncate">
-            {lastMessage}
-          </p>
-        )}
-        {!isChat && !lastMessage && (
-          <p className="text-sm text-muted-foreground">
-            {t('home.noMessages')}
-          </p>
-        )}
-      </div>
-      {isChat && date && (
-        <div className="text-xs text-muted-foreground whitespace-nowrap">
-          {formatDate(date)}
+        <div className="flex items-center justify-between mb-0.5">
+          <h3 className="font-bold text-foreground truncate group-hover:text-primary transition-colors duration-200">{name}</h3>
+          {isChat && date && (
+            <span className="text-[10px] font-medium text-chart-1 uppercase tracking-wider">
+              {formatDate(date)}
+            </span>
+          )}
         </div>
-      )}
+        <div className="flex items-center gap-1.5">
+          {isChat && lastMessage ? (
+            <p className="text-sm text-chart-1 truncate font-medium">
+              {lastMessage}
+            </p>
+          ) : (
+            <p className="text-sm text-chart-1 font-medium">
+              {t('home.noMessages')}
+            </p>
+          )}
+        </div>
+      </div>
     </Link>
   )
 }
