@@ -29,7 +29,7 @@ const App = () => {
           children: [
             {
               path: '/chats',
-              element: null, // ChatLayout already renders ChatsPage in the sidebar
+              element: null, 
             },
             {
               path: '/chat/:id',
