@@ -18,7 +18,7 @@ const Layout = () => {
 
   return (
     <motion.div
-      className={`flex flex-col md:flex-row ${isChatPage ? 'h-screen' : 'min-h-screen'} bg-linear-to-br from-background via-background to-accent/10 relative overflow-hidden`}
+      className={`flex flex-col md:flex-row ${isChatPage ? 'h-screen' : 'min-h-screen'} bg-linear-to-br from-background via-background to-accent/10 relative `}
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5 }}
